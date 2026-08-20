@@ -117,6 +117,16 @@
   }
   .placeholder b{color:var(--io-text-secondary);}
 
+  .agenda-wrap{overflow-x:auto;margin-top:var(--io-spacing-16);}
+  table.agenda{border-collapse:collapse;width:100%;min-width:640px;background:var(--io-surface-layer-01);border:1px solid var(--io-border-default);border-radius:12px;}
+  .agenda th,.agenda td{padding:var(--io-spacing-12) var(--io-spacing-16);text-align:left;border-bottom:1px solid var(--io-border-default);font-size:var(--io-type-size-small);}
+  .agenda thead th{background:var(--io-surface-layer-03);color:var(--io-text-primary);font-weight:600;}
+  .agenda td{color:var(--io-text-secondary);}
+  .agenda td.t{font-variant-numeric:tabular-nums lining-nums;white-space:nowrap;}
+  .agenda tbody th{font-weight:500;color:var(--io-text-primary);}
+  .agenda tbody tr:last-child th,.agenda tbody tr:last-child td{border-bottom:0;font-weight:600;color:var(--io-text-primary);}
+  .agenda-note{font-size:var(--io-type-size-caption);color:var(--io-text-muted);margin-top:var(--io-spacing-8);}
+
   footer{margin-top:var(--io-spacing-64);padding-top:var(--io-spacing-16);border-top:1px solid var(--io-border-default);font-size:var(--io-type-size-caption);color:var(--io-text-muted);display:flex;justify-content:space-between;gap:var(--io-spacing-16);flex-wrap:wrap;}
 </style>
 </head>
@@ -170,7 +180,29 @@
     </div>
 
     <h3>The day at a glance</h3>
-    <div class="placeholder"><b>Agenda to follow.</b> Timings, rooms and the running order land here once confirmed. Start by opening the info packs to see what each activity involves.</div>
+    <div class="agenda-wrap">
+      <table class="agenda">
+        <caption class="visually-hidden" style="position:absolute;left:-9999px;">Event day agenda with local times for London, Barcelona, Tel Aviv and New York</caption>
+        <thead>
+          <tr><th scope="col">Session</th><th scope="col">London</th><th scope="col">Barcelona</th><th scope="col">Tel Aviv</th><th scope="col">New York</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Welcome and vision</th><td class="t">09:00</td><td class="t">10:00</td><td class="t">11:00</td><td class="t">07:30</td></tr>
+          <tr><th scope="row">Fireside chat</th><td class="t">09:30</td><td class="t">10:30</td><td class="t">11:30</td><td class="t">10:45</td></tr>
+          <tr><th scope="row">Persona walkthrough</th><td class="t">10:15</td><td class="t">11:15</td><td class="t">12:15</td><td class="t">12:15</td></tr>
+          <tr><th scope="row">Hackathon group work</th><td class="t">11:30</td><td class="t">12:30</td><td class="t">13:30</td><td class="t" aria-label="Not running in New York">—</td></tr>
+          <tr><th scope="row">Lunch</th><td class="t">12:20</td><td class="t">13:20</td><td class="t">14:20</td><td class="t">11:30</td></tr>
+          <tr><th scope="row">Sales Dragon's Den</th><td class="t">13:00</td><td class="t">14:00</td><td class="t">15:00</td><td class="t">08:00</td></tr>
+          <tr><th scope="row">Break</th><td class="t">13:45</td><td class="t">14:45</td><td class="t">15:45</td><td class="t">08:45</td></tr>
+          <tr><th scope="row">Best idea brainstorm and submit</th><td class="t">13:55</td><td class="t">14:55</td><td class="t">15:55</td><td class="t">08:55</td></tr>
+          <tr><th scope="row">Company quiz</th><td class="t">14:40</td><td class="t">15:40</td><td class="t">16:40</td><td class="t">09:40</td></tr>
+          <tr><th scope="row">Hackathon presentations</th><td class="t">15:00</td><td class="t">16:00</td><td class="t">17:00</td><td class="t">10:00</td></tr>
+          <tr><th scope="row">Awards, drinks and DJ</th><td class="t">15:40</td><td class="t">16:40</td><td class="t">17:40</td><td class="t">13:30</td></tr>
+          <tr><th scope="row">Close</th><td class="t">17:00</td><td class="t">18:00</td><td class="t">19:00</td><td class="t">15:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="agenda-note">All times are local to each office. New York joins later in the day and does not run the hackathon group work session.</p>
   </section>
 
   <!-- ============ HACKATHON ============ -->
