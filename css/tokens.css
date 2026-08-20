@@ -1,0 +1,459 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --io-spacing-1: 1px; /** Hairline spacing */
+  --io-spacing-2: 2px; /** Minimal spacing */
+  --io-spacing-4: 4px; /** Extra small spacing */
+  --io-spacing-8: 8px; /** Small spacing */
+  --io-spacing-12: 12px; /** Medium-small spacing */
+  --io-spacing-16: 16px; /** Base spacing */
+  --io-spacing-20: 20px; /** Medium spacing */
+  --io-spacing-24: 24px; /** Large spacing */
+  --io-spacing-32: 32px; /** Extra large spacing */
+  --io-spacing-40: 40px; /** XXL spacing */
+  --io-spacing-48: 48px; /** XXXL spacing */
+  --io-spacing-64: 64px; /** Section-internal spacing */
+  --io-spacing-80: 80px; /** Section gap. Added 2026-08-15: the ladder stopped at 64, so a page-level gap between sections had no legal token and consumers hardcoded px (#190). */
+  --io-spacing-96: 96px; /** Section gap, generous. The common choice for the space between major page sections. */
+  --io-spacing-128: 128px; /** Maximum spacing. Page-level band separation; beyond this, the gap is a layout decision (a region) rather than a spacing step. */
+  --io-border-radius-none: 0px; /** Sharp corners */
+  --io-border-radius-xs: 2px; /** Minimal rounding */
+  --io-border-radius-sm: 4px; /** Small rounding */
+  --io-border-radius-base: 8px; /** Default rounding */
+  --io-border-radius-lg: 12px; /** Large rounding */
+  --io-border-radius-xl: 16px; /** Extra large rounding */
+  --io-border-radius-2xl: 24px; /** Maximum rounding */
+  --io-border-radius-full: 9999px; /** Fully rounded */
+  --io-border-width-none: 0px; /** No border */
+  --io-border-width-hairline: 0.5px; /** Minimal border */
+  --io-border-width-thin: 1px; /** Thin border */
+  --io-border-width-base: 2px; /** Default border */
+  --io-border-width-thick: 4px; /** Thick border */
+  --io-border-width-heavy: 6px; /** Heavy border */
+  --io-font-family-primary: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif; /** GENOME-track font family. The fallback is Arial Narrow, not system-ui: system-ui is not condensed, so a Barlow load failure reflowed the page. This stack must match the genome family in assets/fonts/manifest.json and the web fallbackRoute in source/typography/profiles.manifest.json — asserted by tests/typography/typography-contract.test.mjs. */
+  --io-font-family-condensed: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif; /** Condensed font family. Same stack as primary — both resolve to Barlow Semi Condensed, whose only sane fallback is another condensed face. */
+  --io-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; /** MONOSPACED family for code, pre, kbd, samp and any aligned column. A SYSTEM stack, deliberately not a brand family: there is no Barlow Mono, and the brand has no mono companion yet (BED-138). It shipped as 'Barlow Semi Condensed, system-ui, sans-serif' — proportional and condensed at every step, so the token named mono was never mono and every artefact's pre block lost its column alignment (BED-139). ui-monospace resolves to the platform UI mono (SF Mono, Cascadia); the terminal generic monospace keyword is the INVARIANT — this stack can never fall through to a proportional face. Its contract is therefore not 'matches assets/fonts/manifest.json' (it has no entry there) but 'ends in monospace and names no proportional family' — asserted by tests/typography/typography-contract.test.mjs. */
+  --io-font-family-legacy: Archia, system-ui, sans-serif; /** LEGACY-track font family, faithful to the shipping --1e- product. Intent HQ holds the Archia licences; canonical WOFF2 files and the public prototype stylesheet ship from the design system. Genome track stays Barlow Semi Condensed (OFL). */
+  --io-font-weight-thin: 100; /** Thin font weight */
+  --io-font-weight-extralight: 200; /** Extra light font weight */
+  --io-font-weight-light: 300; /** Light font weight */
+  --io-font-weight-normal: 400; /** Normal font weight */
+  --io-font-weight-medium: 500; /** Medium font weight */
+  --io-font-weight-semibold: 600; /** Semibold font weight */
+  --io-font-weight-bold: 700; /** Bold font weight */
+  --io-font-weight-extrabold: 800; /** Extra bold font weight */
+  --io-font-weight-black: 900; /** Black font weight */
+  --io-line-height-none: 1; /** Line height none */
+  --io-line-height-tight: 1.25; /** Line height tight */
+  --io-line-height-snug: 1.375; /** Line height snug */
+  --io-line-height-normal: 1.5; /** Line height normal */
+  --io-line-height-relaxed: 1.625; /** Line height relaxed */
+  --io-line-height-loose: 2; /** Line height loose */
+  --io-letter-spacing-tighter: -0.05em; /** Letter spacing tighter */
+  --io-letter-spacing-tight: -0.025em; /** Letter spacing tight */
+  --io-letter-spacing-normal: 0em; /** Letter spacing normal */
+  --io-letter-spacing-wide: 0.025em; /** Letter spacing wide */
+  --io-letter-spacing-wider: 0.05em; /** Letter spacing wider */
+  --io-letter-spacing-widest: 0.1em; /** Letter spacing widest */
+  --io-paragraph-spacing-none: 0px; /** Paragraph spacing none */
+  --io-paragraph-spacing-xs: 8px; /** Paragraph spacing extra small */
+  --io-paragraph-spacing-sm: 12px; /** Paragraph spacing small */
+  --io-paragraph-spacing-md: 16px; /** Paragraph spacing medium */
+  --io-paragraph-spacing-lg: 24px; /** Paragraph spacing large */
+  --io-paragraph-spacing-xl: 32px; /** Paragraph spacing extra large */
+  --io-paragraph-indent-none: 0px; /** Paragraph indent none */
+  --io-paragraph-indent-sm: 16px; /** Paragraph indent small */
+  --io-paragraph-indent-md: 24px; /** Paragraph indent medium */
+  --io-text-case-none: none; /** Keep original casing */
+  --io-text-case-uppercase: uppercase; /** Transform text to uppercase */
+  --io-text-case-lowercase: lowercase; /** Transform text to lowercase */
+  --io-text-case-capitalize: capitalize; /** Capitalize each word */
+  --io-text-decoration-none: none; /** No text decoration */
+  --io-text-decoration-underline: underline; /** Underline decoration */
+  --io-text-decoration-line-through: line-through; /** Line through decoration */
+  --io-opacity-0: 0; /** Fully transparent */
+  --io-opacity-5: 0.05; /** Nearly transparent */
+  --io-opacity-10: 0.1; /** Very transparent */
+  --io-opacity-20: 0.2; /** Mostly transparent */
+  --io-opacity-30: 0.3; /** Moderately transparent */
+  --io-opacity-40: 0.4; /** Semi transparent */
+  --io-opacity-50: 0.5; /** Half transparent */
+  --io-opacity-60: 0.6; /** Somewhat opaque */
+  --io-opacity-70: 0.7; /** Mostly opaque */
+  --io-opacity-80: 0.8; /** Very opaque */
+  --io-opacity-90: 0.9; /** Nearly opaque */
+  --io-opacity-95: 0.95; /** Almost opaque */
+  --io-opacity-100: 1; /** Fully opaque */
+  --io-shadow-sm: 0px 1px 2px 0px rgba(0,0,0,0.1); /** Small shadow */
+  --io-shadow-base: 0px 1px 3px 0px rgba(0,0,0,0.1); /** Base shadow */
+  --io-shadow-md: 0px 4px 6px -1px rgba(0,0,0,0.1); /** Medium shadow */
+  --io-shadow-lg: 0px 10px 15px -3px rgba(0,0,0,0.1); /** Large shadow */
+  --io-shadow-glass: 0px 8px 32px 0px rgba(0,0,0,0.05); /** Glass morphism shadow */
+  --io-blur-sm: 8px; /** Subtle backdrop blur */
+  --io-blur-md: 16px; /** Medium backdrop blur */
+  --io-blur-glass: 32px; /** Frosted-glass backdrop blur radius — paired with shadow/glass + glass/* surfaces on GlassPanel over imagery */
+  --io-color-base-green: oklch(84.05% 0.204 142.8); /** Primary brand green */
+  --io-color-base-turquoise: oklch(82.21% 0.136 183.0); /** Brand turquoise */
+  --io-color-base-blue: oklch(63.95% 0.192 266.2); /** Brand blue */
+  --io-color-base-purple: oklch(73.48% 0.143 284.6); /** Brand purple */
+  --io-color-base-yellow: oklch(91.37% 0.129 93.7); /** Brand yellow */
+  --io-color-base-orange: oklch(64.24% 0.167 29.4); /** Brand orange */
+  --io-color-base-grey: oklch(0.35 0.02 225); /** Neutral grey */
+  --io-color-base-dark-green: oklch(29.65% 0.032 161.9); /** Brand dark green */
+  --io-color-base-white: oklch(100.00% 0.0000 0.0); /** Legacy neutral — pure white (faithful to production --1e-color-white #ffffff) */
+  --io-color-base-off-white: oklch(96.27% 0.0106 197.0); /** Legacy off-white app ground (production --1e-color-neutral-off-white #ebf5f5) — the mint-tinted canvas the shipping product paints <body> and the client shell with (intent-one-ui src/app/layout.tsx, src/app/[clientId]/layout.tsx). Production backfilled it as a primitive OUTSIDE the semantic background trio, so the 2026-06-13 semantic mapping never saw it and legacy-light grounded screens on the neutral grey ramp instead. Added 2026-08-06. Deliberately not on the grey ramp: hue 197 carries the mint tint the ramp lacks. */
+  --io-color-base-grey-10: oklch(95.79% 0.0029 264.5); /** Legacy neutral 10 (production --1e-color-grey-10 #f0f1f3) — secondary surface */
+  --io-color-base-grey-25: oklch(89.33% 0.0064 255.5); /** Legacy neutral 25 (production --1e-color-grey-25 #d9dce0) — borders / tertiary surface */
+  --io-color-base-grey-50: oklch(78.17% 0.0152 264.5); /** Legacy neutral 50 (production --1e-color-grey-50 #b3b8c2) — muted text / strong border */
+  --io-color-base-grey-70: oklch(64.31% 0.0220 267.2); /** Legacy neutral 70 (production --1e-color-grey-70 #878d9b) — secondary text */
+  --io-color-base-grey-75: oklch(54.00% 0.0210 267.2); /** Legacy neutral 75 (~#696f7b) — AA muted text on white (5.07:1). Added 2026-07-06 to restore the 3-level legacy-light text hierarchy: the shipped ramp jumps from grey-70 (3.33:1, sub-AA) to grey-80 (7.45:1), so text/muted had collapsed onto text/secondary. Same hue/chroma family as grey-70/80. */
+  --io-color-base-grey-80: oklch(45.00% 0.0200 267.2); /** Legacy neutral 80 — dark borders/raised surfaces (added 2026-06-16 for legacy-dark; extends the grey-10..70 family downward, same hue/chroma) */
+  --io-color-base-grey-90: oklch(30.00% 0.0180 267.2); /** Legacy neutral 90 — secondary dark surface (legacy-dark) */
+  --io-color-base-grey-95: oklch(22.00% 0.0150 267.2); /** Legacy neutral 95 — sunken / layer dark surface (legacy-dark) */
+  --io-color-base-grey-100: oklch(16.00% 0.0120 267.2); /** Legacy neutral 100 — darkest base surface (legacy-dark primary ground) */
+  --io-color-base-green-10: oklch(98.09% 0.0219 145.4); /** Legacy green tint 10 (production --1e-color-green-10 #f0fdf0) */
+  --io-color-base-green-25: oklch(95.34% 0.0550 144.3); /** Legacy green tint 25 (production --1e-color-green-25 #dafad9) */
+  --io-color-base-green-50: oklch(91.13% 0.1080 143.9); /** Legacy green tint 50 (production --1e-color-green-50 #b6f5b4) */
+  --io-color-base-green-60: oklch(89.58% 0.1287 143.5); /** Legacy green tint 60 (production --1e-color-green-60 #a8f3a5) */
+  --io-color-base-green-70: oklch(88.05% 0.1493 143.5); /** Legacy green tint 70 (production --1e-color-green-70 #99f196) */
+  --io-color-base-green-80: oklch(86.65% 0.1686 143.2); /** Legacy green tint 80 (production --1e-color-green-80 #8bef87) */
+  --io-color-base-green-90: oklch(85.33% 0.1868 142.9); /** Legacy green tint 90 (production --1e-color-green-90 #7ded78) */
+  --io-color-base-green-95: oklch(84.66% 0.1955 143.0); /** Legacy green tint 95 (production --1e-color-green-95 #75ec71) */
+  --io-color-base-turquoise-10: oklch(98.41% 0.0137 191.4); /** Legacy turquoise tint 10 (production --1e-color-turquoise-10 #f0fdfc) */
+  --io-color-base-turquoise-25: oklch(95.60% 0.0324 189.5); /** Legacy turquoise tint 25 (production --1e-color-turquoise-25 #d9f8f5) */
+  --io-color-base-turquoise-50: oklch(89.82% 0.0838 186.4); /** Legacy turquoise tint 50 (production --1e-color-turquoise-50 #9bf0e6) */
+  --io-color-base-turquoise-60: oklch(88.07% 0.0976 185.8); /** Legacy turquoise tint 60 (production --1e-color-turquoise-60 #87ede1) */
+  --io-color-base-turquoise-70: oklch(86.43% 0.1099 185.2); /** Legacy turquoise tint 70 (production --1e-color-turquoise-70 #73eadc) */
+  --io-color-base-turquoise-80: oklch(84.90% 0.1205 184.6); /** Legacy turquoise tint 80 (production --1e-color-turquoise-80 #5fe7d7) */
+  --io-color-base-turquoise-90: oklch(83.50% 0.1292 183.8); /** Legacy turquoise tint 90 (production --1e-color-turquoise-90 #4be4d2) */
+  --io-color-base-turquoise-95: oklch(82.70% 0.1325 183.4); /** Legacy turquoise tint 95 (production --1e-color-turquoise-95 #41e2cf) */
+  --io-color-base-blue-10: oklch(96.73% 0.0153 270.0); /** Legacy blue tint 10 (production --1e-color-blue-10 #f0f4ff) */
+  --io-color-base-blue-25: oklch(93.07% 0.0332 274.6); /** Legacy blue tint 25 (production --1e-color-blue-25 #e1e7ff) */
+  --io-color-base-blue-50: oklch(81.60% 0.0915 268.6); /** Legacy blue tint 50 (production --1e-color-blue-50 #aac1ff) */
+  --io-color-base-blue-60: oklch(78.06% 0.1107 267.9); /** Legacy blue tint 60 (production --1e-color-blue-60 #99b5ff) */
+  --io-color-base-blue-70: oklch(74.36% 0.1312 267.8); /** Legacy blue tint 70 (production --1e-color-blue-70 #88a8ff) */
+  --io-color-base-blue-80: oklch(70.73% 0.1520 267.5); /** Legacy blue tint 80 (production --1e-color-blue-80 #779bff) */
+  --io-color-base-blue-90: oklch(67.18% 0.1728 267.0); /** Legacy blue tint 90 (production --1e-color-blue-90 #668eff) */
+  --io-color-base-blue-95: oklch(65.58% 0.1823 266.7); /** Legacy blue tint 95 (production --1e-color-blue-95 #5e88ff) */
+  --io-color-base-purple-10: oklch(97.84% 0.0106 286.2); /** Legacy purple tint 10 (production --1e-color-purple-10 #f7f7ff) */
+  --io-color-base-purple-25: oklch(95.22% 0.0241 288.5); /** Legacy purple tint 25 (production --1e-color-purple-25 #eeedff) */
+  --io-color-base-purple-50: oklch(86.64% 0.0689 286.7); /** Legacy purple tint 50 (production --1e-color-purple-50 #cfcdff) */
+  --io-color-base-purple-60: oklch(84.02% 0.0834 286.7); /** Legacy purple tint 60 (production --1e-color-purple-60 #c6c3ff) */
+  --io-color-base-purple-70: oklch(81.40% 0.0980 286.6); /** Legacy purple tint 70 (production --1e-color-purple-70 #bdb9ff) */
+  --io-color-base-purple-80: oklch(78.72% 0.1128 285.8); /** Legacy purple tint 80 (production --1e-color-purple-80 #b3afff) */
+  --io-color-base-purple-90: oklch(76.05% 0.1277 285.0); /** Legacy purple tint 90 (production --1e-color-purple-90 #a9a5ff) */
+  --io-color-base-purple-95: oklch(74.80% 0.1351 285.0); /** Legacy purple tint 95 (production --1e-color-purple-95 #a5a0ff) */
+  --io-color-base-orange-10: oklch(96.40% 0.0133 28.9); /** Legacy orange tint 10 (production --1e-color-orange-10 #fcf0ee) */
+  --io-color-base-orange-25: oklch(92.79% 0.0274 31.7); /** Legacy orange tint 25 (production --1e-color-orange-25 #f9e1dc) */
+  --io-color-base-orange-50: oklch(85.77% 0.0550 33.7); /** Legacy orange tint 50 (production --1e-color-orange-50 #f2c4b9) */
+  --io-color-base-orange-60: oklch(77.36% 0.0951 27.5); /** Legacy orange tint 60 (production --1e-color-orange-60 #ec9e94) */
+  --io-color-base-orange-70: oklch(77.03% 0.0981 32.0); /** Legacy orange tint 70 (production --1e-color-orange-70 #ec9d8d) */
+  --io-color-base-orange-80: oklch(73.60% 0.1153 30.6); /** Legacy orange tint 80 (production --1e-color-orange-80 #e98d7d) */
+  --io-color-base-orange-90: oklch(70.30% 0.1328 29.9); /** Legacy orange tint 90 (production --1e-color-orange-90 #e67d6d) */
+  --io-color-base-orange-95: oklch(67.17% 0.1502 29.5); /** Legacy orange tint 95 (production --1e-color-orange-95 #e36d5d) */
+  --io-color-base-yellow-10: oklch(99.21% 0.0172 99.6); /** Legacy yellow tint 10 (production --1e-color-yellow-10 #fffdf0) */
+  --io-color-base-yellow-25: oklch(98.51% 0.0303 98.8); /** Legacy yellow tint 25 (production --1e-color-yellow-25 #fffbe4) */
+  --io-color-base-yellow-50: oklch(95.43% 0.0698 94.1); /** Legacy yellow tint 50 (production --1e-color-yellow-50 #fff0bb) */
+  --io-color-base-yellow-60: oklch(94.57% 0.0834 94.3); /** Legacy yellow tint 60 (production --1e-color-yellow-60 #ffedad) */
+  --io-color-base-yellow-70: oklch(93.74% 0.0954 94.1); /** Legacy yellow tint 70 (production --1e-color-yellow-70 #ffeaa0) */
+  --io-color-base-yellow-80: oklch(92.94% 0.1070 94.0); /** Legacy yellow tint 80 (production --1e-color-yellow-80 #ffe793) */
+  --io-color-base-yellow-90: oklch(92.14% 0.1189 94.0); /** Legacy yellow tint 90 (production --1e-color-yellow-90 #ffe485) */
+  --io-color-base-yellow-95: oklch(91.66% 0.1232 93.5); /** Legacy yellow tint 95 (production --1e-color-yellow-95 #ffe27f) */
+  --io-color-warm-0: #fffcf7;
+  --io-color-warm-1: #fffaf3;
+  --io-color-warm-2: #fff7ec;
+  --io-color-warm-3: #fff5e6;
+  --io-color-warm-4: #f5e9d7;
+  --io-color-warm-5: #ecddc8;
+  --io-color-warm-6: #e4d3bc;
+  --io-color-warm-7: #ddc9b0;
+  --io-color-warm-8: #d9c4aa;
+  --io-color-warm-9: #d0baa0;
+  --io-color-warm-10: #c2aa90;
+  --io-color-warm-11: #ab9077;
+  --io-color-warm-12: #997c62;
+  --io-color-warm-13: #86674d;
+  --io-color-warm-14: #7d5d43;
+  --io-color-warm-15: #785940;
+  --io-color-warm-16: #73563e;
+  --io-color-warm-17: #644b36;
+  --io-color-warm-18: #4c382a;
+  --io-color-warm-19: #38291f;
+  --io-color-warm-20: #241a15;
+  --io-color-warm-21: #1f1713;
+  --io-color-warm-22: #1a1310;
+  --io-color-genome-aqua-base: #91d5d6;
+  --io-color-genome-aqua-light: #addfe0;
+  --io-color-genome-aqua-lighter: #c8eaeb;
+  --io-color-genome-aqua-dark: #307f80;
+  --io-color-genome-aqua-display: #018d8f; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.02:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +31% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (197.1deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-aqua-ink: #006e70; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.54:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +9% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (197.1deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-green-base: #00d058;
+  --io-color-genome-green-light: #40db80;
+  --io-color-genome-green-lighter: #80e6a7;
+  --io-color-genome-green-dark: #008639;
+  --io-color-genome-green-display: #01933c; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.00:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +9% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (148.5deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-green-ink: #00732d; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.51:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -9% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (148.5deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-lime-base: #d6de2d;
+  --io-color-genome-lime-light: #e0e560;
+  --io-color-genome-lime-lighter: #ebed92;
+  --io-color-genome-lime-dark: #747813;
+  --io-color-genome-lime-display: #7f8402; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.03:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +13% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (112.4deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-lime-ink: #636701; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.54:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -6% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (112.4deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-red-base: #f32217;
+  --io-color-genome-red-light: #f6594f;
+  --io-color-genome-red-lighter: #f98f87;
+  --io-color-genome-red-dark: #e5170c;
+  --io-color-genome-red-display: #fe0400; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.01:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +11% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (29.3deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-red-ink: #c90200; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.51:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -7% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (29.3deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-magenta-base: #ff458b;
+  --io-color-genome-magenta-light: #ff73a6;
+  --io-color-genome-magenta-lighter: #ffa0c1;
+  --io-color-genome-magenta-dark: #e50056;
+  --io-color-genome-magenta-display: #f7007b; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.00:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +8% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (2.8deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-magenta-ink: #c30160; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.51:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -10% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (2.8deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-rust-base: #af421d;
+  --io-color-genome-rust-light: #c37154;
+  --io-color-genome-rust-lighter: #d79f8a;
+  --io-color-genome-rust-dark: #af421d;
+  --io-color-genome-rust-display: #e44800; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.01:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +34% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (38.0deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-rust-ink: #b43700; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.51:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +12% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (38.0deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-orange-base: #f27d28;
+  --io-color-genome-orange-light: #f59d5c;
+  --io-color-genome-orange-lighter: #f9bc8f;
+  --io-color-genome-orange-dark: #bc560b;
+  --io-color-genome-orange-display: #ca6001; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.04:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +5% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (51.1deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-orange-ink: #9f4a01; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.56:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -12% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (51.1deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-leaf-base: #6cc336;
+  --io-color-genome-leaf-light: #91d166;
+  --io-color-genome-leaf-lighter: #b5df96;
+  --io-color-genome-leaf-dark: #488124;
+  --io-color-genome-leaf-display: #449000; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.01:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +25% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (136.1deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-leaf-ink: #347000; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.55:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +4% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (136.1deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-mint-base: #81e7ce;
+  --io-color-genome-mint-light: #a1ecd8;
+  --io-color-genome-mint-lighter: #c0f1e3;
+  --io-color-genome-mint-dark: #198269;
+  --io-color-genome-mint-display: #028f78; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.03:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +10% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (176.0deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-mint-ink: #03705d; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.52:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -8% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (176.0deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-purple-base: #6b398a;
+  --io-color-genome-purple-light: #906aa5;
+  --io-color-genome-purple-lighter: #b59ac1;
+  --io-color-genome-purple-dark: #6b398a;
+  --io-color-genome-purple-display: #b600ff; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.55:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +123% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (310.5deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-purple-ink: #9d01dd; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.52:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +100% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (310.5deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-orchid-base: #d287b8;
+  --io-color-genome-orchid-light: #dda4c8;
+  --io-color-genome-orchid-lighter: #e9c1d7;
+  --io-color-genome-orchid-dark: #bb4893;
+  --io-color-genome-orchid-display: #eb00ba; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.00:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +61% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (340.8deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-orchid-ink: #b90192; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.52:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +35% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (340.8deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-gold-base: #b2761f;
+  --io-color-genome-gold-light: #c59755;
+  --io-color-genome-gold-lighter: #d9b98b;
+  --io-color-genome-gold-dark: #9e681b;
+  --io-color-genome-gold-display: #b17101; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.01:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +17% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (70.6deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-gold-ink: #8b5800; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.51:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -2% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (70.6deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-yellow-base: #ffe637;
+  --io-color-genome-yellow-light: #ffeb67;
+  --io-color-genome-yellow-lighter: #fff197;
+  --io-color-genome-yellow-dark: #847400;
+  --io-color-genome-yellow-display: #8e7f00; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.04:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +7% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (100.6deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-yellow-ink: #6f6300; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.55:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -11% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (100.6deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-blue-base: #00b1f7;
+  --io-color-genome-blue-light: #40c4f7;
+  --io-color-genome-blue-lighter: #80d7f7;
+  --io-color-genome-blue-dark: #007cac;
+  --io-color-genome-blue-display: #0087be; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.02:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma +9% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (235.9deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-blue-ink: #016995; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.56:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -9% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (235.9deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-sky-base: #6bd6ff;
+  --io-color-genome-sky-light: #90dffd;
+  --io-color-genome-sky-lighter: #b5e9fb;
+  --io-color-genome-sky-dark: #0097c4; /** CHART CATEGORICAL SERIES 8 (light themes) — and nothing else consumes it. Re-hued from #007cab, which sat OKLab dE 0.16 from blue.dark (#007cac): indistinguishable, so an 8-series chart rendered two series the reader could not separate (#157). The cause is structural, not a typo — this family's base hue is 225.8deg and blue's is 235.9deg, only 10.1deg apart, so two dark steps calibrated to similar lightness on the same page converge. #0097c4 opens the gap to dE 8.02 while holding 3.30:1 on genome-light ground and 5.44:1 on genome-dark. tests/themes/chart-distinctness.test.mjs now gates the whole ramp at dE >= 2.0 per theme, so a future re-derivation cannot silently re-collide. */
+  --io-color-genome-sky-display: #0089af; /** ACCENT TEXT AT LARGE SIZE (>=24PX REGULAR, >=18.66PX BOLD) — WCAG floor 3:1. Measures 3.03:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -3% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (225.8deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). Do NOT use at body size — that is the .ink step at 4.5:1. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-color-genome-sky-ink: #006b8a; /** ACCENT TEXT AT BODY SIZE — WCAG floor 4.5:1. Measures 4.54:1 on --io-surface-sunken (#ecddc8), the DARKEST of the 7 genome-light surface roles, so it holds on every one of them — page, all three raised layers, and a sunken well. Chroma -18% against .dark. DERIVED, not hand-picked: the maximum in-gamut OKLCH chroma at this family's base hue (225.8deg) whose QUANTISED sRGB hex clears the floor — a float that clears it can round to a hex that does not, which is how four display steps shipped at 2.99:1 (#178). At large sizes .display carries more chroma for the same legibility. The family's .dark step is NOT this: it is calibrated on the page alone with 1.8% headroom and fails AA on every other surface, and it doubles as the light-theme chart categorical series. Regenerate with `node tools/derive-accent-steps.mjs --write`; `--check` gates it in CI. */
+  --io-shell-rail-docked: 68px; /** Docked navigation rail. The PERSISTENT layout gutter — it does not change on hover, which is what makes hover-expand viable: main content is offset by this and only this, so nothing reflows when the panel opens. Measured from the reference implementation at reason.intenthq.com/app (.reason-nav, data-expanded=false and =true both 68px, with main at x=68 in both states). */
+  --io-shell-rail-expanded: 264px; /** Expanded navigation panel. OVERLAYS the content region rather than pushing it — main stays at x=rail.docked while this is open. Measured: .reason-nav__panel at 264px with data-expanded=true. Pushing content instead would reflow the page on hover, which is why the overlay is load-bearing rather than stylistic. */
+  --io-shell-header: 80px; /** Shell header row. Measured 80px in the reference implementation (both the nav and main regions begin at y=80). Supersedes the app-shell pattern prose, which said "under ~64px" — the reference is 80. */
+  --io-state-layer-minimal-alpha: 0.04; /** ALPHA, not a colour. Subtle hover / weak-signal overlay (Material 3 state-layer model). Use as opacity: var(--io-state-layer-minimal-alpha), or compose a fill with color-mix(in srgb, var(--io-text-primary) 4%, transparent). `background: var(--io-state-layer-minimal-alpha)` is `background: 0.04` and invalid — the -alpha suffix exists so that reads wrong. */
+  --io-state-layer-standard-alpha: 0.08; /** ALPHA, not a colour. Default hover overlay. See minimal-alpha for the two legal forms. */
+  --io-state-layer-strong-alpha: 0.12; /** ALPHA, not a colour. Active / pressed / drag. */
+  --io-state-layer-emphasis-alpha: 0.16; /** ALPHA, not a colour. Error / high-urgency overlay. */
+  --io-alpha-disabled: 0.5; /** Disabled element opacity */
+  --io-alpha-text-secondary: 0.7;
+  --io-alpha-text-tertiary: 0.55;
+  --io-motion-duration-instant: 120ms; /** micro-feedback: hover, toggle */
+  --io-motion-duration-fast: 180ms; /** state-change, data highlight */
+  --io-motion-duration-moderate: 280ms; /** modal / drawer / list-enter */
+  --io-motion-duration-slow: 420ms; /** hero reveal, major hierarchy shift */
+  --io-motion-stagger-subtle: 30ms;
+  --io-motion-stagger-standard: 50ms; /** cap total stagger <=150ms (Doherty) */
+  --io-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1); /** default UI transition (M3 standard); most state changes */
+  --io-motion-easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1); /** expressive decelerate for hero / large-surface reveals (M3 emphasized) */
+  --io-motion-easing-decelerate: cubic-bezier(0, 0, 0.2, 1); /** incoming elements settling (ease-out); enter transitions */
+  --io-motion-easing-accelerate: cubic-bezier(0.4, 0, 1, 1); /** outgoing elements exiting (ease-in); exit transitions */
+  --io-confidence-threshold-high: 0.7; /** score >=0.7  => high tier */
+  --io-confidence-threshold-medium: 0.55; /** score >=0.55 => medium tier */
+  --io-confidence-threshold-floor: 0.4; /** score <0.4   => unknown tier */
+  --io-type-size-caption: 12px; /** Dense-UI floor shared by the legacy Archia and genome Barlow profiles (Spectrum 1:1.25 scale) */
+  --io-type-size-small: 14px;
+  --io-type-size-body: 16px; /** Base */
+  --io-type-size-body-lg: 18px;
+  --io-type-size-h4: 20px;
+  --io-type-size-h3: 25px;
+  --io-type-size-h2: 31px;
+  --io-type-size-h1: 39px;
+  --io-type-size-display: 49px;
+  --io-type-size-display-lg: 61px;
+  --io-type-size-fluid-caption: 0.75rem; /** Immovable: 12px, 0.67px above the §weight_size_floor 500-weight floor of 11.34px. */
+  --io-type-size-fluid-small: 0.875rem; /** Immovable: 14px sits EXACTLY on the §weight_size_floor 400-weight floor. One step down (13.99px = 10.49pt) rounds into the 9-10pt band whose floor is 500, so any shrink at weight 400 is a TYPE-013 violation. */
+  --io-type-size-fluid-body: clamp(0.875rem, 0.7813rem + 0.4167cqi, 1rem); /** 16px -> 14px. The min IS the 400-weight floor; it cannot go lower without a weight bump to 500. */
+  --io-type-size-fluid-body-lg: clamp(0.9375rem, 0.7969rem + 0.625cqi, 1.125rem); /** 18px -> 15px. Crosses a band ROW (b3 18px -> b4) with no floor change, so TYPE-014 does not trigger under the floor-rise rule. */
+  --io-type-size-fluid-h4: clamp(1rem, 0.8125rem + 0.8333cqi, 1.25rem);
+  --io-type-size-fluid-h3: clamp(1.1875rem, 0.9063rem + 1.25cqi, 1.5625rem);
+  --io-type-size-fluid-h2: clamp(1.375rem, 0.9531rem + 1.875cqi, 1.9375rem); /** 31px -> 22px. Floor RISES 300 -> 400 across the range, so TYPE-014 triggers; weight 600 clears the required bump target of 500. */
+  --io-type-size-fluid-h1: clamp(1.6875rem, 1.125rem + 2.5cqi, 2.4375rem);
+  --io-type-size-fluid-display: clamp(2.0625rem, 1.3125rem + 3.3333cqi, 3.0625rem); /** 49px -> 33px. Floor RISES 200 -> 300, so TYPE-014 triggers; weight 700 clears the required bump target of 400. */
+  --io-type-size-fluid-display-lg: clamp(2.5rem, 1.5156rem + 4.375cqi, 3.8125rem);
+  --io-type-leading-caption: 1.3333; /** 16 / 12 */
+  --io-type-leading-small: 1.4286; /** 20 / 14 */
+  --io-type-leading-body: 1.5; /** 24 / 16 */
+  --io-type-leading-body-lg: 1.5556; /** 28 / 18 */
+  --io-type-leading-h4: 1.4; /** 28 / 20 */
+  --io-type-leading-h3: 1.28; /** 32 / 25 */
+  --io-type-leading-h2: 1.2258; /** 38 / 31 */
+  --io-type-leading-h1: 1.1795; /** 46 / 39 */
+  --io-type-leading-display: 1.1429; /** 56 / 49 */
+  --io-type-leading-display-lg: 1.1148; /** 68 / 61 */
+  --io-type-line-caption: 16px;
+  --io-type-line-small: 20px;
+  --io-type-line-body: 24px;
+  --io-type-line-body-lg: 28px;
+  --io-type-line-h4: 28px;
+  --io-type-line-h3: 32px;
+  --io-type-line-h2: 38px;
+  --io-type-line-h1: 46px;
+  --io-type-line-display: 56px;
+  --io-type-line-display-lg: 68px;
+  --io-type-letter-caption: 0.005em; /** Metadata/footnote tracking — type-contract §tracking.caption. Declared in em because the contract declares tracking in em and it must survive a size change. NOT a label ramp: uppercase labels use type/letter/eyebrow. */
+  --io-type-letter-eyebrow: 0.08em; /** Tracked-caps label ramp — type-contract §eyebrow_style_overlay. Clears the §tracking.case_delta.all_caps_label floor (0.08em), which the former caption value of 0.5px = 0.0417em at 12px fell BELOW. */
+  --io-type-letter-small: 0.1px;
+  --io-type-letter-body: 0px;
+  --io-type-letter-body-lg: 0px;
+  --io-type-letter-h4: 0px;
+  --io-type-letter-h3: -0.1px; /** Monotonic tracking ramp (was 0) */
+  --io-type-letter-h2: -0.15px; /** Monotonic tracking ramp (was 0) */
+  --io-type-letter-h1: -0.2px;
+  --io-type-letter-display: -0.25px;
+  --io-type-letter-display-lg: -0.5px;
+  --io-type-paragraph-caption: 8px;
+  --io-type-paragraph-small: 8px;
+  --io-type-paragraph-body: 12px;
+  --io-type-paragraph-body-lg: 12px;
+  --io-type-paragraph-h4: 0px;
+  --io-type-paragraph-h3: 0px;
+  --io-type-paragraph-h2: 0px;
+  --io-type-paragraph-h1: 0px;
+  --io-type-paragraph-display: 0px;
+  --io-type-paragraph-display-lg: 0px;
+  --io-type-weight-caption: 500; /** Small-text optical compensation — type-contract §weight.caption. Also satisfies §weight_size_floor: 12px = 9pt, whose band floor is 500. */
+  --io-type-weight-small: 400;
+  --io-type-weight-body: 400;
+  --io-type-weight-body-lg: 400;
+  --io-type-weight-h4: 600;
+  --io-type-weight-h3: 600;
+  --io-type-weight-h2: 600;
+  --io-type-weight-h1: 600;
+  --io-type-weight-display: 700;
+  --io-type-weight-display-lg: 700;
+  --io-type-slide-statement-size: 81px; /** bold-700 arrival headline */
+  --io-type-slide-statement-line: 76px; /** 0.94 × 81 */
+  --io-type-slide-statement-letter: -2.19px; /** -0.027em × 81 (display -0.02 + weight-700 delta -0.006) */
+  --io-type-slide-statement-weight: 700;
+  --io-type-slide-body-size: 32px; /** impact-register lede */
+  --io-type-slide-body-line: 38px; /** 1.2 × 32 */
+  --io-type-slide-body-letter: -0.7px; /** -0.022em × 32 (lede only, never <70ch prose) */
+  --io-type-slide-body-weight: 400;
+  --io-type-slide-eyebrow-size: 14px; /** all-caps overlay label */
+  --io-type-slide-eyebrow-line: 13px; /** 0.9 × 14 (single-line caps) */
+  --io-type-slide-eyebrow-letter: 2.52px; /** +0.18em × 14 (all-caps clamp) */
+  --io-type-slide-eyebrow-weight: 500;
+  --io-density-scale-comfortable: 1; /** Default density multiplier. Applied via [data-density] -> --io-density-scale; spacing/font/row-height multiply by it. USER-FACING toggle (persists per user). */
+  --io-density-scale-compact: 0.85; /** Dense dashboards / data tables */
+  --io-density-scale-ultracompact: 0.7; /** Power-user / max-density (guard: icon + touch targets floor at 44px regardless) */
+  --io-density-row-height-comfortable: 40px;
+  --io-density-row-height-compact: 32px;
+  --io-density-row-height-ultracompact: 24px;
+  --io-measure-latin: 70ch; /** Readable line-length ceiling for Latin prose (max-inline-size). Consumed via the --io-measure active role, switched by dir/lang (see tokens.css runtime binding). */
+  --io-measure-cjk: 40ch; /** CJK prose measure — denser glyphs, shorter line. */
+  --io-measure-rtl: 75ch; /** RTL (Arabic/Hebrew) prose measure. */
+  --io-prose-line-latin: 1.45; /** Latin prose line-height (unitless). Consumed via the --io-prose-line active role, switched by dir/lang. */
+  --io-prose-line-cjk: 1.6; /** CJK prose line-height — taller for stacked glyphs. */
+  --io-prose-line-rtl: 1.4; /** RTL prose line-height. */
+  --io-glass-surface-dark: rgba(26, 19, 16, 0.7); /** Dark frosted-glass fill — warm-22 @ 70% over imagery (GlassPanel tone=dark). Mode-invariant brand surface; the alpha is the contrast FLOOR so glass ink stays AA even composited over a bright photo. */
+  --io-glass-surface-light: rgba(255, 252, 247, 0.55); /** Light frosted-glass fill — warm-0 cream @ 55% over imagery (GlassPanel tone=light). Warm cream, on-brand, rather than literal white. */
+  --io-glass-border-dark: var(--io-color-warm-16); /** Hairline border for dark frosted glass */
+  --io-glass-border-light: var(--io-color-warm-6); /** Hairline border for light frosted glass */
+  --io-glass-ink-dark: var(--io-color-warm-0); /** Ink for the DARK-tone glass panel — warm-0 cream. AA-body over the composited dark fill on any photo (6.64:1 worst case over white). */
+  --io-glass-ink-light: var(--io-color-warm-22); /** Ink for the LIGHT-tone glass panel — warm-22 truffle. AA-body over the composited light fill on any photo (5.39:1 worst case over black). */
+  --io-state-layer-minimal: var(--io-state-layer-minimal-alpha); /** DEPRECATED alias of state.layer.minimal-alpha; the unsuffixed name reads like a colour and invited `background: 0.04`. Kept so 3.x consumers do not break — remove at the next major. */
+  --io-state-layer-standard: var(--io-state-layer-standard-alpha); /** DEPRECATED alias of state.layer.standard-alpha. Remove at the next major. */
+  --io-state-layer-strong: var(--io-state-layer-strong-alpha); /** DEPRECATED alias of state.layer.strong-alpha. Remove at the next major. */
+  --io-state-layer-emphasis: var(--io-state-layer-emphasis-alpha); /** DEPRECATED alias of state.layer.emphasis-alpha. Remove at the next major. */
+  --io-type-case-caption: var(--io-text-case-none); /** The contract declares NO case for the caption role (metadata, footnote, supporting text). Uppercase belongs to type/case/eyebrow. */
+  --io-type-case-eyebrow: var(--io-text-case-uppercase); /** Tracked-caps label ramp — type-contract §eyebrow_style_overlay. */
+  --io-type-case-small: var(--io-text-case-none);
+  --io-type-case-body: var(--io-text-case-none);
+  --io-type-case-body-lg: var(--io-text-case-none);
+  --io-type-case-h4: var(--io-text-case-none);
+  --io-type-case-h3: var(--io-text-case-none);
+  --io-type-case-h2: var(--io-text-case-none);
+  --io-type-case-h1: var(--io-text-case-none);
+  --io-type-case-display: var(--io-text-case-none);
+  --io-type-case-display-lg: var(--io-text-case-none);
+  --io-type-weight-eyebrow: var(--io-type-weight-caption); /** Tracked-caps label ramp — type-contract §weight.eyebrow is 500, the same as §weight.caption. Aliased rather than restated so the two cannot drift: the label ramp differs from caption by CASE and TRACKING, never by weight. */
+  --io-type-slide-statement-case: var(--io-text-case-none);
+  --io-type-slide-body-case: var(--io-text-case-none);
+  --io-type-slide-eyebrow-case: var(--io-text-case-uppercase);
+}
+
+/**
+ * Runtime bindings — active roles the DOM toggles flip. Do not edit directly;
+ * this block is appended by style-dictionary.config.mjs.
+ */
+
+/* Density: [data-density] on any ancestor -> --io-density-scale / --io-density-row-height. */
+:root {
+  --io-density-scale: var(--io-density-scale-comfortable);
+  --io-density-row-height: var(--io-density-row-height-comfortable);
+}
+[data-density="comfortable"] {
+  --io-density-scale: var(--io-density-scale-comfortable);
+  --io-density-row-height: var(--io-density-row-height-comfortable);
+}
+[data-density="compact"] {
+  --io-density-scale: var(--io-density-scale-compact);
+  --io-density-row-height: var(--io-density-row-height-compact);
+}
+[data-density="ultracompact"] {
+  --io-density-scale: var(--io-density-scale-ultracompact);
+  --io-density-row-height: var(--io-density-row-height-ultracompact);
+}
+
+/* i18n: prose measure + line-height, switched by writing system. Default lives on
+ * :where(:root) at ZERO specificity so [dir]/:lang set on the SAME <html> element
+ * (which also matches :root) win — a plain :root default would out-specify them. */
+:where(:root) {
+  --io-measure: var(--io-measure-latin);
+  --io-prose-line: var(--io-prose-line-latin);
+}
+[dir="rtl"] {
+  --io-measure: var(--io-measure-rtl);
+  --io-prose-line: var(--io-prose-line-rtl);
+}
+:lang(zh), :lang(ja), :lang(ko) {
+  --io-measure: var(--io-measure-cjk);
+  --io-prose-line: var(--io-prose-line-cjk);
+}

@@ -1,0 +1,97 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root, [data-brand="genome"][data-theme="light"] {
+  --io-surface-primary: var(--io-color-warm-0); /** Genome light primary surface #fffcf7 (Jerry 2026-06-05) */
+  --io-surface-secondary: var(--io-color-warm-2); /** Genome light secondary surface #fff7ec */
+  --io-surface-sunken: var(--io-color-warm-5); /** Recessed wells (#ecddc8) */
+  --io-surface-ground: var(--io-color-warm-5); /** App-shell page ground. Genome has no distinct ground: the role exists for cross-track parity with legacy-light (whose ground is the product's mint off-white) and aliases surface/sunken here. */
+  --io-surface-layer-00: var(--io-color-warm-0); /** Elevation base/page — warm-0 #fffcf7, the LIGHTEST end of the warm ramp. A light theme anchors here and stacks darker; see $note. */
+  --io-surface-layer-01: var(--io-color-warm-2); /** Raised — cards. warm-2, ΔL -1.26 from the page (1.038:1). */
+  --io-surface-layer-02: var(--io-color-warm-3); /** Floating — warm-3, ΔL -0.54 from layer-01 (1.016:1). The faintest step in either scheme, and a known consequence of the ramp's compressed light end: warm-0..3 spans ΔL 1.81 while warm-19..22 spans 10.09, so the light end is ~5.6× denser. Respacing warm-1..3 is the root fix and is a separate decision. */
+  --io-surface-layer-03: var(--io-color-warm-4); /** Overlay/modal — warm-4, ΔL -2.48 from layer-02 (1.128:1). The deepest layer the ink allows; see $note. */
+  --io-surface-scrim: color-mix(in srgb, var(--io-color-warm-22) 55%, transparent); /** Modal / dialog backdrop — the dimming veil BEHIND layer-03, not a panel fill. warm-22 at 55%: the same alpha as glass/surface/light, reused deliberately rather than picking a new number. Distinct from glass/surface/* — glass is a translucent PANEL over imagery, a scrim suppresses the layer beneath. Carries no contrast obligation of its own (WCAG gates the ink on the panel above it), which is why it is a fixed alpha rather than a derived step, and why -hc inherits it unchanged. Added 2026-08-04: with no scrim role, the first internal-tool consumer had to color-mix text/primary to avoid hardcoding an rgba(). */
+  --io-surface-chrome: color-mix(in srgb, var(--io-color-warm-0) 55%, transparent); /** APP CHROME fill — a translucent bar/rail/header that floats over scrolling content, so the content shows through and the chrome stays legible. Reuses the glass alphas (55% light / 70% dark) deliberately rather than picking new numbers, the same reasoning as surface/scrim. DISTINCT FROM glass/surface/* even though the values coincide today: glass is IMAGERY-scoped and mode-INVARIANT — its light/dark choice follows the tone of the photograph underneath a GlassPanel, not the active theme — whereas chrome follows the theme. Collapsing the two would make the imagery case wrong the moment a dark panel sits on a light theme. Also distinct from surface/scrim: a scrim SUPPRESSES what is beneath it, chrome must remain readable as a surface in its own right. The -hc pair does NOT inherit this: at a AAA target a 55-70% fill undercuts the guarantee the theme exists to make, so high-contrast chrome resolves to an OPAQUE step (warm.2 / warm.20, the surface/secondary step, i.e. one off the page). That is why this role appears in ANCHOR: it is the one way build() can override a non-ramp value for -hc instead of copying it through. */
+  --io-text-primary: var(--io-color-warm-18); /** Light-theme ink. INSETS off the ramp's dark extreme rather than taking it — see the INK DIRECTION ruling in $note. Descriptions here stay step-agnostic because the -hc derivation copies them onto different steps. */
+  --io-text-secondary: var(--io-color-warm-17); /** One rung below primary, and also the focus ring (see border/interactive). Moved as a consequence of the ink ruling — see $note. */
+  --io-text-muted: var(--io-color-warm-14); /** The rung that BOUNDS the elevation stack — see $note. Unchanged by the ink ruling. */
+  --io-text-on-accent: var(--io-color-warm-22); /** Dark ink on bright genome accents. Deliberately NOT moved by the ink ruling — its ground is a saturated accent, not cream; see $note. */
+  --io-text-link: var(--io-color-genome-blue-ink); /** Inline link ink. The .ink step, NOT .base and NOT .dark: .base is a fill (3.49:1 as ink) and .dark is calibrated on the page alone, so it fails on every card and modal. .ink is derived at 4.5:1 against the DARKEST genome-light surface, so a link holds on the page, all three raised layers and in a sunken well — measured 5.94 / 5.72 / 5.63 / 5.07 / 4.56. Hue family matches action/secondary (blue); the STEP differs, because a fill and an ink are not the same quantity. Added 2026-08-04: with no link role at all, the first internal-tool consumer bound a raw genome primitive and flagged it in code. */
+  --io-border-default: var(--io-color-warm-7);
+  --io-border-strong: var(--io-color-warm-11);
+  --io-border-focus: var(--io-color-warm-12); /** FOCUS RING boundary. Clears WCAG 1.4.11 3:1 against BOTH the page AND the near-black inner ring of the two-tone Button focus indicator — the pair of constraints that rules out the obvious candidates. border/strong measured 1.99-2.94 against the page (#189), and text/secondary clears the page at 7.9 but only 2.27 against the inner ring, so the two rings would merge. Do not substitute either. genome-light: 3.79 page / 4.73 inner. */
+  --io-border-interactive: var(--io-color-warm-13); /** Conformant resting boundary (5.05:1 on surface/primary) for EMPTY controls (Checkbox/Radio). Deliberately a darker-than-typical mid-tone for margin (warm.12 at 3.79 is thinner); the system's only conformant resting border token. The focus ring is border/focus. */
+  --io-action-primary: var(--io-color-genome-green-base); /** The primary action fill — the ONE main action in a flow, and confirmation. VALUE-COLLIDES with state/success and category/kpi/accent in this theme, so the token NAME is the only thing telling them apart. Do NOT use it for success feedback (use state/success), for KPI category coding (use category/kpi/accent), or for a second competing button on the same screen. */
+  --io-action-primary-hover: var(--io-color-genome-green-light); /** Hover/active fill for action/primary only. VALUE-COLLIDES with the confidence/medium pair. Do NOT use it as a resting fill, and do NOT use it to express a confidence tier. */
+  --io-action-primary-text: var(--io-color-warm-22); /** Ink ON action/primary. Pairs only with the action/primary fill; do NOT use it as page ink (use text/primary) — its ground is a saturated accent, not cream. */
+  --io-action-secondary: var(--io-color-genome-blue-base); /** The secondary action fill — the lesser action beside action/primary. VALUE-COLLIDES with state/info and category/chart/accent. Do NOT use it for informational messaging (use state/info) or for chart category coding (use category/chart/accent). */
+  --io-state-success: var(--io-color-genome-green-base); /** System SUCCESS feedback — confirmation messages, success banners, valid-field indication. VALUE-COLLIDES with action/primary and category/kpi/accent. Do NOT use it as a button fill (use action/primary) or for KPI category coding (use category/kpi/accent). */
+  --io-state-warning: var(--io-color-genome-yellow-base); /** System WARNING feedback — recoverable problems and cautions that do not block. Do NOT use it for destructive or failed states (use state/error), and do NOT use it decoratively. */
+  --io-state-error: var(--io-color-genome-red-base); /** System DANGER — destructive action fills, error text, error borders, invalid fields. The only role that may signal irreversible or failed operations. Do NOT use it for category coding, charts, decoration or brand moments (use category/<domain>/accent for coding and the chart/<role> roles for series), and never pair text on it without checking validate_contrast: text-on-accent over this role is the thinnest margin in the theme. */
+  --io-state-info: var(--io-color-genome-blue-base); /** System INFORMATIONAL feedback — neutral notices carrying no success/failure judgement. VALUE-COLLIDES with action/secondary and category/chart/accent. Do NOT use it as a button fill (use action/secondary) or for chart category coding (use category/chart/accent). */
+  --io-category-opportunity-accent: var(--io-color-genome-gold-base); /** Opportunity domain coding. Decorative only — do NOT use it for warnings (use state/warning) despite the warm hue. */
+  --io-category-opportunity-subtle: var(--io-color-genome-gold-lighter); /** Opportunity domain wash — chip and row backgrounds behind category/opportunity/accent. */
+  --io-category-audience-accent: var(--io-color-genome-sky-base); /** Audience domain coding. VALUE-COLLIDES with category/retention/accent — identical fill, so audience and retention cannot be told apart by colour alone; if a view shows both, distinguish them by label or icon, not hue. */
+  --io-category-audience-subtle: var(--io-color-genome-sky-lighter); /** Audience domain wash. Value-collides with category/retention/subtle. */
+  --io-category-kpi-accent: var(--io-color-genome-green-base); /** KPI domain coding. VALUE-COLLIDES with action/primary and state/success — decorative only: do NOT use it as a button fill or to signal success. */
+  --io-category-kpi-subtle: var(--io-color-genome-green-lighter); /** KPI domain wash. Value-collides with the confidence/low pair; do NOT use it to express a confidence tier. */
+  --io-category-market-insights-accent: var(--io-color-genome-purple-base); /** Market-insights domain coding. VALUE-COLLIDES with category/moment/accent — distinguish by label or icon, not hue. */
+  --io-category-market-insights-subtle: var(--io-color-genome-purple-lighter); /** Market-insights domain wash. Value-collides with category/moment/subtle. */
+  --io-category-chart-accent: var(--io-color-genome-blue-base); /** Chart DOMAIN coding — the chip that labels charting as a product area. NOT a data-series colour: series bind to the chart/* roles per get_dataviz_canon (UI accents and the chart palette are separate SSOTs). VALUE-COLLIDES with action/secondary and state/info. */
+  --io-category-chart-subtle: var(--io-color-genome-blue-lighter); /** Chart domain wash. Not a series fill — see get_dataviz_canon. */
+  --io-category-retention-accent: var(--io-color-genome-sky-base); /** Retention domain coding. VALUE-COLLIDES with category/audience/accent — identical fill; distinguish by label or icon, not hue. */
+  --io-category-retention-subtle: var(--io-color-genome-sky-lighter); /** Retention domain wash. Value-collides with category/audience/subtle. */
+  --io-category-engagement-accent: var(--io-color-genome-orange-base); /** Engagement domain coding. The only category accent with no value collision in this theme. */
+  --io-category-engagement-subtle: var(--io-color-genome-orange-lighter); /** Engagement domain wash. */
+  --io-category-moment-accent: var(--io-color-genome-purple-base); /** Moment domain coding. VALUE-COLLIDES with category/market-insights/accent — distinguish by label or icon, not hue. */
+  --io-category-moment-subtle: var(--io-color-genome-purple-lighter); /** Moment domain wash. Value-collides with category/market-insights/subtle. */
+  --io-confidence-high-bg: var(--io-color-genome-green-base); /** Confidence >=0.7 — MOST prominent. Green intensity encodes confidence level, NOT valence (a high-confidence negative finding is still high-prominence). */
+  --io-confidence-high-text: var(--io-color-warm-22); /** Dark ink on bright genome accent (text/on-accent rule) */
+  --io-confidence-high-border: var(--io-color-genome-green-base);
+  --io-confidence-medium-bg: var(--io-color-genome-green-light); /** 0.55-0.7 — moderate prominence */
+  --io-confidence-medium-text: var(--io-color-warm-22);
+  --io-confidence-medium-border: var(--io-color-genome-green-light);
+  --io-confidence-low-bg: var(--io-color-genome-green-lighter); /** 0.4-0.55 — quiet prominence */
+  --io-confidence-low-text: var(--io-color-warm-22);
+  --io-confidence-low-border: var(--io-color-genome-green-lighter);
+  --io-confidence-unknown-bg: var(--io-color-warm-2); /** <0.4 / null — no confidence signal: warm-neutral, NOT green (absence of signal, not low-positive) */
+  --io-confidence-unknown-text: var(--io-color-warm-14);
+  --io-confidence-unknown-border: var(--io-color-warm-8);
+  --io-chart-sequential-1: var(--io-color-genome-blue-lighter); /** lowest magnitude — the step nearest the page. Shares its primitive with other roles by design: the sequential ramp reuses the brand blue tints rather than introducing new colour. */
+  --io-chart-sequential-2: var(--io-color-genome-blue-light); /** second magnitude step. Collides with the same-tint categorical/accent roles intentionally — a shared primitive is the point, since the ramp must stay inside the approved palette. */
+  --io-chart-sequential-3: var(--io-color-genome-blue-base); /** third magnitude step. Shares its primitive with same-tint roles by design; ordering, not uniqueness, is what this role guarantees. */
+  --io-chart-sequential-4: var(--io-color-genome-blue-dark); /** highest magnitude — the step furthest from the page. Shares blue.dark with chart.categorical.1 deliberately: identical value, different contract. categorical.1 promises distinctness from its siblings, sequential.4 promises it is the extreme of an ordered ramp. */
+  --io-chart-categorical-1: var(--io-color-genome-blue-dark); /** first categorical series slot — the chart primary. Shares blue.dark with chart.sequential.4, which is intentional and not a duplicate to collapse: identical value, different contract. This role promises distinctness from its categorical siblings (gated at OKLab dE >= 2.0); sequential.4 promises only that it is the extreme of an ordered ramp. Changing one must not silently change the other. */
+  --io-chart-categorical-2: var(--io-color-genome-orange-dark);
+  --io-chart-categorical-3: var(--io-color-genome-green-dark);
+  --io-chart-categorical-4: var(--io-color-genome-purple-dark);
+  --io-chart-categorical-5: var(--io-color-genome-gold-dark);
+  --io-chart-categorical-6: var(--io-color-genome-aqua-dark);
+  --io-chart-categorical-7: var(--io-color-genome-red-dark);
+  --io-chart-categorical-8: var(--io-color-genome-sky-dark);
+  --io-chart-categorical-9: var(--io-color-genome-lime-dark);
+  --io-chart-categorical-10: var(--io-color-genome-magenta-dark);
+  --io-chart-categorical-11: var(--io-color-genome-mint-dark);
+  --io-chart-categorical-12: var(--io-color-genome-rust-dark);
+  --io-chart-categorical-13: var(--io-color-genome-orchid-dark);
+  --io-chart-categorical-14: var(--io-color-genome-leaf-dark);
+  --io-chart-categorical-15: var(--io-color-genome-yellow-dark);
+  --io-chart-positive: var(--io-color-genome-green-dark);
+  --io-chart-negative: var(--io-color-genome-red-dark);
+  --io-chart-warning: var(--io-color-genome-orange-dark);
+  --io-chart-neutral: var(--io-color-warm-14);
+  --io-chart-grid: var(--io-color-warm-6);
+  --io-chart-axis: var(--io-color-warm-17);
+  --io-chart-label: var(--io-color-warm-18); /** Follows text/primary under the INK DIRECTION ruling — a chart label is ink on the cream ground, so the same argument applies. Now ADJACENT to chart/axis where the two were five ramp steps apart: they are distinguished by weight and placement rather than tone. If a chart ever needs the label to dominate, lighten the axis; do not darken the label back. See $note. */
+  --io-font-primary: var(--io-font-family-primary); /** Genome track font — Barlow Semi Condensed (OFL). Same role the legacy track resolves to Archia; making font a themed semantic role is what lets one component render both tracks. */
+}
+
+/**
+ * Native UI scheme — makes the BROWSER paint its own controls (scrollbars, form controls,
+ * date pickers, spellcheck) to match this theme. Semantic tokens cannot reach UA-painted
+ * surfaces. Appended by tools/build-themes.mjs; do not edit directly.
+ */
+:root, [data-brand="genome"][data-theme="light"] {
+  color-scheme: light;
+}

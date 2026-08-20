@@ -1,0 +1,35 @@
+name: Hackathon submission
+description: Submit your team's hackathon entry for the IntentOne event day.
+title: "[Hackathon] "
+labels: ["hackathon-submission"]
+body:
+  - type: input
+    id: team
+    attributes:
+      label: Team name
+      description: Who built this. List teammates if you like.
+    validations:
+      required: true
+  - type: input
+    id: challenge
+    attributes:
+      label: Challenge
+      description: Which challenge or track this entry answers.
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What you built
+      description: Two or three sentences. What it does, who it is for, and what works today.
+    validations:
+      required: true
+  - type: input
+    id: demo
+    attributes:
+      label: Demo link
+      description: A URL where judges can see it — deployed app, video, or prototype.
+  - type: input
+    id: repo
+    attributes:
+      label: Code or repo link

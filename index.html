@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-brand="genome" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IntentOne event day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Intent design system, vendored verbatim from @intenthq/design-system v3.17.3 (no-build consumer, route 2). Do not edit these two files. -->
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/genome-light.css">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{transition-duration:0s !important;animation-duration:0s !important;}
+  }
+  body{
+    margin:0;
+    background:var(--io-surface-sunken);
+    font-family:"Barlow Semi Condensed","Arial Narrow",sans-serif;
+    color:var(--io-text-primary);
+    -webkit-font-smoothing:antialiased;
+    font-kerning:normal;
+  }
+  .page{max-width:1080px;margin:0 auto;background:var(--io-surface-primary);padding:var(--io-spacing-40) var(--io-spacing-48) var(--io-spacing-64);min-height:100vh;}
+  @media (max-width:760px){.page{padding:var(--io-spacing-24) var(--io-spacing-16) var(--io-spacing-48);}}
+
+  :focus-visible{outline:2px solid var(--io-border-strong);outline-offset:2px;border-radius:4px;}
+
+  /* Behavioural genome strip: dense horizontal bands, rendered by JS into .genome-strip */
+  .genome-strip{width:64px;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;flex:0 0 auto;align-self:stretch;min-height:120px;}
+  .genome-strip span{display:block;width:100%;}
+
+  header.hero{display:flex;gap:var(--io-spacing-24);align-items:stretch;margin-bottom:var(--io-spacing-24);}
+  .hero-copy{flex:1;}
+  .overline{font-size:var(--io-type-size-caption);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--io-text-muted);margin:0 0 var(--io-spacing-12);}
+  h1{font-size:var(--io-type-size-display);line-height:1.1;font-weight:700;letter-spacing:-0.25px;margin:0 0 var(--io-spacing-12);color:var(--io-text-primary);max-width:20ch;}
+  .lede{font-size:var(--io-type-size-body-lg);line-height:1.5;color:var(--io-text-secondary);max-width:64ch;margin:0;}
+
+  nav.tabs{display:flex;gap:var(--io-spacing-8);flex-wrap:wrap;margin:var(--io-spacing-24) 0 var(--io-spacing-32);border-bottom:1px solid var(--io-border-default);padding-bottom:var(--io-spacing-12);}
+  .tab{
+    font-family:inherit;cursor:pointer;background:none;border:1px solid var(--io-border-default);border-radius:8px;
+    padding:var(--io-spacing-12) var(--io-spacing-20);min-height:44px;
+    font-size:var(--io-type-size-small);font-weight:600;letter-spacing:.02em;color:var(--io-text-secondary);
+    transition:border-color .18s,color .18s,background .18s;
+  }
+  .tab:hover{border-color:var(--io-border-interactive);color:var(--io-text-primary);}
+  .tab[aria-current="page"]{background:var(--io-surface-layer-03);border-color:var(--io-border-strong);color:var(--io-text-primary);}
+
+  .view{display:none;}
+  .view.on{display:block;}
+
+  h2{font-size:var(--io-type-size-h2);line-height:1.2;font-weight:600;letter-spacing:-0.15px;margin:0 0 var(--io-spacing-8);color:var(--io-text-primary);}
+  h3{font-size:var(--io-type-size-h3);line-height:1.3;font-weight:600;margin:var(--io-spacing-32) 0 var(--io-spacing-8);color:var(--io-text-primary);}
+  h4{font-size:var(--io-type-size-h4);line-height:1.4;font-weight:600;margin:var(--io-spacing-24) 0 var(--io-spacing-8);color:var(--io-text-primary);}
+  p{font-size:var(--io-type-size-body);line-height:1.5;color:var(--io-text-secondary);max-width:70ch;}
+  a{color:var(--io-text-link);}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--io-spacing-16);margin-top:var(--io-spacing-24);}
+  .card{
+    display:flex;flex-direction:column;text-align:left;font-family:inherit;cursor:pointer;
+    background:var(--io-surface-layer-01);border:1px solid var(--io-border-default);border-radius:12px;
+    padding:var(--io-spacing-20) var(--io-spacing-20) var(--io-spacing-16);
+    transition:border-color .18s,background .18s;
+  }
+  .card:hover{border-color:var(--io-border-interactive);background:var(--io-surface-layer-02);}
+  .card .kicker{font-size:var(--io-type-size-caption);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--io-text-muted);}
+  .card h3{margin:var(--io-spacing-4) 0 var(--io-spacing-8);font-size:var(--io-type-size-h3);}
+  .card p{font-size:var(--io-type-size-small);margin:0 0 var(--io-spacing-16);}
+  .card .go{margin-top:auto;font-size:var(--io-type-size-small);font-weight:600;color:var(--io-text-link);padding-top:var(--io-spacing-12);border-top:1px solid var(--io-border-default);}
+
+  /* Status badge: dot + label, never colour alone */
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:var(--io-type-size-caption);font-weight:500;color:var(--io-text-secondary);border:1px solid var(--io-border-default);border-radius:999px;padding:3px 10px;background:var(--io-surface-layer-00);}
+  .badge .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto;}
+  .dot-open{background:var(--io-state-info);}
+  .dot-shortlisted{background:var(--io-state-success);}
+  .dot-pending{background:var(--io-state-warning);}
+
+  form.submit{background:var(--io-surface-layer-01);border:1px solid var(--io-border-default);border-radius:12px;padding:var(--io-spacing-24);margin-top:var(--io-spacing-16);max-width:720px;}
+  .field{margin-bottom:var(--io-spacing-16);}
+  .field label{display:block;font-size:var(--io-type-size-small);font-weight:600;color:var(--io-text-primary);margin-bottom:var(--io-spacing-4);}
+  .field .hint{display:block;font-size:var(--io-type-size-caption);font-weight:400;color:var(--io-text-muted);margin-top:2px;}
+  .field input,.field textarea,.field select{
+    width:100%;font-family:inherit;font-size:var(--io-type-size-body);color:var(--io-text-primary);
+    background:var(--io-surface-layer-00);border:1px solid var(--io-border-default);border-radius:8px;
+    padding:var(--io-spacing-12);min-height:44px;
+  }
+  .field textarea{min-height:120px;resize:vertical;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;
+    font-family:inherit;font-size:var(--io-type-size-body);font-weight:600;
+    background:var(--io-action-primary);color:var(--io-action-primary-text);
+    border:none;border-radius:8px;padding:var(--io-spacing-12) var(--io-spacing-24);min-height:44px;
+    transition:background .18s;
+  }
+  .btn:hover{background:var(--io-action-primary-hover);}
+  .btn.secondary{background:var(--io-surface-layer-00);color:var(--io-text-primary);border:1px solid var(--io-border-strong);}
+  .formnote{font-size:var(--io-type-size-caption);color:var(--io-text-muted);margin-top:var(--io-spacing-12);max-width:60ch;}
+
+  .list{display:flex;flex-direction:column;gap:var(--io-spacing-12);margin-top:var(--io-spacing-16);}
+  .entry{background:var(--io-surface-layer-01);border:1px solid var(--io-border-default);border-radius:10px;padding:var(--io-spacing-16) var(--io-spacing-20);}
+  .entry .top{display:flex;justify-content:space-between;gap:var(--io-spacing-16);align-items:baseline;flex-wrap:wrap;}
+  .entry .title{font-size:var(--io-type-size-body-lg);font-weight:600;color:var(--io-text-primary);text-decoration:none;}
+  .entry .title:hover{color:var(--io-text-link);}
+  .entry .meta{font-size:var(--io-type-size-caption);color:var(--io-text-muted);}
+  .entry .body{font-size:var(--io-type-size-small);line-height:1.5;color:var(--io-text-secondary);margin-top:var(--io-spacing-8);white-space:pre-line;}
+  .listnote{font-size:var(--io-type-size-small);color:var(--io-text-muted);margin-top:var(--io-spacing-16);}
+
+  .pack{background:var(--io-surface-layer-01);border:1px solid var(--io-border-default);border-radius:12px;padding:var(--io-spacing-24);margin-top:var(--io-spacing-16);}
+  .pack h3{margin-top:0;}
+  .placeholder{
+    border:1px dashed var(--io-border-strong);border-radius:8px;background:var(--io-surface-layer-00);
+    padding:var(--io-spacing-16);font-size:var(--io-type-size-small);color:var(--io-text-muted);max-width:70ch;
+  }
+  .placeholder b{color:var(--io-text-secondary);}
+
+  footer{margin-top:var(--io-spacing-64);padding-top:var(--io-spacing-16);border-top:1px solid var(--io-border-default);font-size:var(--io-type-size-caption);color:var(--io-text-muted);display:flex;justify-content:space-between;gap:var(--io-spacing-16);flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="genome-strip" aria-hidden="true" id="genome1"></div>
+    <div class="hero-copy">
+      <p class="overline">Intent · IntentOne event day</p>
+      <h1>One day. One product. Everyone building.</h1>
+      <p class="lede">Everything for the day lives here: the hackathon brief and submissions, the best-ideas box, the information packs for each activity, and the shortlist once judging runs.</p>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button class="tab" data-view="home">Home</button>
+    <button class="tab" data-view="hackathon">Hackathon</button>
+    <button class="tab" data-view="ideas">Best ideas</button>
+    <button class="tab" data-view="shortlist">Shortlist</button>
+    <button class="tab" data-view="packs">Info packs</button>
+  </nav>
+
+  <!-- ============ HOME ============ -->
+  <section class="view" id="view-home" aria-label="Home">
+    <div class="cards">
+      <button class="card" data-view="hackathon">
+        <span class="kicker">01 · Build</span>
+        <h3>Hackathon</h3>
+        <p>The challenge brief, how the day runs, and the submission form. One entry per team before the deadline.</p>
+        <span class="go">Enter the hackathon →</span>
+      </button>
+      <button class="card" data-view="ideas">
+        <span class="kicker">02 · Capture</span>
+        <h3>Best ideas</h3>
+        <p>Not everything good today is a build. Drop any idea worth keeping in here as it happens, in under a minute.</p>
+        <span class="go">Submit an idea →</span>
+      </button>
+      <button class="card" data-view="shortlist">
+        <span class="kicker">03 · Judge</span>
+        <h3>Shortlist</h3>
+        <p>The judged shortlist of hackathon submissions appears here once the judging pass has run.</p>
+        <span class="go">See the shortlist →</span>
+      </button>
+      <button class="card" data-view="packs">
+        <span class="kicker">04 · Learn</span>
+        <h3>Info packs</h3>
+        <p>The reference material for the day: activities, the persona walkthroughs, timings and logistics.</p>
+        <span class="go">Open the packs →</span>
+      </button>
+    </div>
+
+    <h3>The day at a glance</h3>
+    <div class="placeholder"><b>Agenda to follow.</b> Timings, rooms and the running order land here once confirmed. Start by opening the info packs to see what each activity involves.</div>
+  </section>
+
+  <!-- ============ HACKATHON ============ -->
+  <section class="view" id="view-hackathon" aria-label="Hackathon">
+    <h2>Hackathon</h2>
+    <p>Teams build against the IntentOne challenge and submit before the deadline. Submissions are public to everyone in the room, and the judging pass shortlists the strongest against the criteria in the brief.</p>
+
+    <h3>The brief</h3>
+    <div class="pack">
+      <div class="placeholder"><b>Challenge brief to follow.</b> This section will carry the challenge statement, the judging criteria, team rules, timings and what a complete submission looks like.</div>
+    </div>
+
+    <h3>Submit your entry</h3>
+    <form class="submit" id="hack-form">
+      <div class="field">
+        <label for="hf-team">Team name</label>
+        <input id="hf-team" name="team" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="hf-title">Project title</label>
+        <input id="hf-title" name="title" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="hf-challenge">Challenge</label>
+        <select id="hf-challenge" name="challenge">
+          <option>Main challenge (details to follow)</option>
+          <option>Open track</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="hf-summary">What you built <span class="hint">Two or three sentences. What it does, who it is for, and what works today.</span></label>
+        <textarea id="hf-summary" name="summary" required></textarea>
+      </div>
+      <div class="field">
+        <label for="hf-demo">Demo link <span class="hint">A URL where judges can see it: deployed app, video, or prototype.</span></label>
+        <input id="hf-demo" name="demo" type="url" placeholder="https://">
+      </div>
+      <div class="field">
+        <label for="hf-repo">Code or repo link</label>
+        <input id="hf-repo" name="repo" type="url" placeholder="https://">
+      </div>
+      <button class="btn" type="submit">Review and submit on GitHub</button>
+      <p class="formnote">Submitting opens a pre-filled GitHub form; press its green button to confirm. You need to be signed in to GitHub. No account? Give your entry to a facilitator and they will file it for you.</p>
+    </form>
+
+    <h3>Submissions</h3>
+    <div class="list" id="hack-list" aria-live="polite"></div>
+    <p class="listnote" id="hack-note"></p>
+  </section>
+
+  <!-- ============ BEST IDEAS ============ -->
+  <section class="view" id="view-ideas" aria-label="Best ideas">
+    <h2>Best ideas</h2>
+    <p>Anything worth keeping from a conversation, a walkthrough or a demo. It takes under a minute, and the best submitted idea of the day gets recognised at the close.</p>
+
+    <form class="submit" id="idea-form">
+      <div class="field">
+        <label for="if-name">Your name</label>
+        <input id="if-name" name="name" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="if-title">The idea, in one line</label>
+        <input id="if-title" name="title" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="if-idea">The idea in full <span class="hint">What it is, and what prompted it today.</span></label>
+        <textarea id="if-idea" name="idea" required></textarea>
+      </div>
+      <div class="field">
+        <label for="if-why">Why it matters <span class="hint">Optional. Who benefits and what it could change.</span></label>
+        <textarea id="if-why" name="why"></textarea>
+      </div>
+      <button class="btn" type="submit">Review and submit on GitHub</button>
+      <p class="formnote">Submitting opens a pre-filled GitHub form; press its green button to confirm. You need to be signed in to GitHub. No account? Tell a facilitator and they will file it for you.</p>
+    </form>
+
+    <h3>Ideas so far</h3>
+    <div class="list" id="idea-list" aria-live="polite"></div>
+    <p class="listnote" id="idea-note"></p>
+  </section>
+
+  <!-- ============ SHORTLIST ============ -->
+  <section class="view" id="view-shortlist" aria-label="Shortlist">
+    <h2>Shortlist</h2>
+    <p>The judging pass reads every hackathon submission against the criteria in the brief and shortlists the strongest. A shortlisted entry appears below with the judge's reasoning attached to it on GitHub.</p>
+    <div class="list" id="short-list" aria-live="polite"></div>
+    <p class="listnote" id="short-note"></p>
+  </section>
+
+  <!-- ============ INFO PACKS ============ -->
+  <section class="view" id="view-packs" aria-label="Info packs">
+    <h2>Info packs</h2>
+    <p>The reference material for each part of the day. Read the pack before the activity starts; each one says what it is, how it runs, and what you leave with.</p>
+
+    <div class="pack" id="pack-activities">
+      <h3>Activities pack</h3>
+      <p class="badge"><span class="dot dot-pending"></span>Content to follow</p>
+      <div class="placeholder"><b>To be filled.</b> One section per activity: what it is, where and when it runs, who leads it, what to bring, and what you leave with.</div>
+    </div>
+
+    <div class="pack" id="pack-personas">
+      <h3>Persona walkthroughs</h3>
+      <p class="badge"><span class="dot dot-pending"></span>Content to follow</p>
+      <div class="placeholder"><b>To be filled.</b> The persona walkthrough guide: which personas we walk, the scenario each one carries through IntentOne, what to watch for in each step, and where to record what you notice — the best-ideas box is one tab away.</div>
+    </div>
+
+    <div class="pack" id="pack-hackathon-brief">
+      <h3>Hackathon brief</h3>
+      <p class="badge"><span class="dot dot-pending"></span>Content to follow</p>
+      <div class="placeholder"><b>To be filled.</b> The challenge statement, judging criteria, team rules, timings and submission requirements. The same brief appears on the hackathon page.</div>
+    </div>
+
+    <div class="pack" id="pack-logistics">
+      <h3>Logistics</h3>
+      <p class="badge"><span class="dot dot-pending"></span>Content to follow</p>
+      <div class="placeholder"><b>To be filled.</b> Venue, rooms, wifi, food, timings, and who to find when something is stuck.</div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Intent · IntentOne event day</span>
+    <span>Submissions are GitHub issues in this site's repository. Design tokens: @intenthq/design-system 3.17.3.</span>
+  </footer>
+</div>
+
+<script>
+// ---------- configuration ----------
+const CFG = {
+  owner: 'georgefoster-blip',
+  repo: 'intentone-event-day',
+  labels: { hackathon: 'hackathon-submission', idea: 'best-idea', shortlisted: 'shortlisted' }
+};
+const GH = 'https://github.com/' + CFG.owner + '/' + CFG.repo;
+const API = 'https://api.github.com/repos/' + CFG.owner + '/' + CFG.repo;
+
+// ---------- behavioural genome strip (dense horizontal bands) ----------
+(function(){
+  const colours = ['--io-color-genome-magenta-base','--io-color-genome-orange-base','--io-color-genome-yellow-base','--io-color-genome-lime-base','--io-color-genome-mint-base','--io-color-genome-sky-base','--io-color-genome-orchid-base','--io-color-genome-red-base'];
+  const cream = getComputedStyle(document.documentElement).getPropertyValue('--io-surface-primary') || '#fff5e6';
+  const el = document.getElementById('genome1');
+  if (!el) return;
+  let seed = 42;
+  const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+  let html = '';
+  for (let i = 0; i < 46; i++) {
+    const h = 2 + Math.floor(rnd() * 9);
+    const c = rnd() < 0.14 ? cream : 'var(' + colours[Math.floor(rnd() * colours.length)] + ')';
+    html += '<span style="height:' + h + 'px;background:' + c + '"></span>';
+  }
+  el.innerHTML = html;
+})();
+
+// ---------- routing ----------
+const VIEWS = ['home','hackathon','ideas','shortlist','packs'];
+function show(v){
+  if (!VIEWS.includes(v)) v = 'home';
+  VIEWS.forEach(k => document.getElementById('view-' + k).classList.toggle('on', k === v));
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.dataset.view === v) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current');
+  });
+  window.scrollTo(0,0);
+}
+function go(v){ show(v); history.replaceState(null,'', v === 'home' ? '#' : '#' + v); }
+document.querySelectorAll('.tab, .card[data-view]').forEach(el => el.addEventListener('click', () => go(el.dataset.view)));
+show((location.hash || '#home').slice(1));
+window.addEventListener('hashchange', () => show((location.hash || '#home').slice(1)));
+
+// ---------- submission forms → pre-filled GitHub issue forms ----------
+document.getElementById('hack-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const f = new FormData(this);
+  const params = new URLSearchParams({
+    template: 'hackathon-submission.yml',
+    title: '[Hackathon] ' + f.get('title'),
+    team: f.get('team'),
+    challenge: f.get('challenge'),
+    summary: f.get('summary'),
+    demo: f.get('demo') || '',
+    repo: f.get('repo') || ''
+  });
+  window.open(GH + '/issues/new?' + params.toString(), '_blank', 'noopener');
+});
+
+document.getElementById('idea-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const f = new FormData(this);
+  const params = new URLSearchParams({
+    template: 'best-idea.yml',
+    title: '[Idea] ' + f.get('title'),
+    name: f.get('name'),
+    idea: f.get('idea'),
+    why: f.get('why') || ''
+  });
+  window.open(GH + '/issues/new?' + params.toString(), '_blank', 'noopener');
+});
+
+// ---------- live lists from the GitHub issues API ----------
+function fieldFromBody(body, heading){
+  // Issue-form bodies render as "### Heading\n\nvalue"
+  if (!body) return '';
+  const re = new RegExp('###\\s*' + heading + '\\s*\\n+([\\s\\S]*?)(?=\\n###|$)', 'i');
+  const m = body.match(re);
+  return m ? m[1].trim().replace(/_No response_/g,'').trim() : '';
+}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+function renderIssues(issues, listEl, opts){
+  if (!issues.length){
+    listEl.innerHTML = '<div class="entry"><span class="body">' + esc(opts.empty) + '</span></div>';
+    return;
+  }
+  listEl.innerHTML = issues.map(is => {
+    const who = fieldFromBody(is.body, opts.whoHeading) || is.user.login;
+    const summary = fieldFromBody(is.body, opts.summaryHeading);
+    const when = new Date(is.created_at).toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
+    const short = (is.labels || []).some(l => l.name === CFG.labels.shortlisted);
+    return '<div class="entry">'
+      + '<div class="top"><a class="title" href="' + is.html_url + '" target="_blank" rel="noopener">' + esc(is.title.replace(/^\[(Hackathon|Idea)\]\s*/,'')) + '</a>'
+      + '<span class="meta">' + esc(who) + ' · ' + when
+      + (short ? ' · <span class="badge"><span class="dot dot-shortlisted"></span>Shortlisted</span>' : '')
+      + '</span></div>'
+      + (summary ? '<div class="body">' + esc(summary) + '</div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+async function loadList(label, listEl, noteEl, opts){
+  listEl.innerHTML = '<div class="entry"><span class="body">Fetching ' + opts.noun + ' from GitHub…</span></div>';
+  try {
+    const r = await fetch(API + '/issues?state=open&per_page=100&labels=' + encodeURIComponent(label));
+    if (!r.ok) throw new Error(r.status);
+    const issues = await r.json();
+    renderIssues(issues, listEl, opts);
+    noteEl.textContent = issues.length + ' ' + opts.noun + (issues.length === 1 ? '' : 's') + ' so far. The list refreshes when you reload the page.';
+  } catch (err) {
+    listEl.innerHTML = '<div class="entry"><span class="body">The ' + esc(opts.noun) + ' list could not load (' + esc(String(err.message || err)) + '). Reload to try again, or open the list directly on GitHub.</span></div>';
+    noteEl.innerHTML = '<a href="' + GH + '/issues?q=is%3Aissue+label%3A' + label + '" target="_blank" rel="noopener">Open the list on GitHub ↗</a>';
+  }
+}
+
+loadList(CFG.labels.hackathon, document.getElementById('hack-list'), document.getElementById('hack-note'),
+  { noun:'submission', empty:'Start by submitting your entry above to see it listed here.', whoHeading:'Team name', summaryHeading:'What you built' });
+loadList(CFG.labels.idea, document.getElementById('idea-list'), document.getElementById('idea-note'),
+  { noun:'idea', empty:'Start by submitting an idea above to see it listed here.', whoHeading:'Your name', summaryHeading:'The idea in full' });
+loadList(CFG.labels.shortlisted, document.getElementById('short-list'), document.getElementById('short-note'),
+  { noun:'shortlisted entry', empty:'Start by submitting hackathon entries to give the judging pass something to read; the shortlist appears here once it has run.', whoHeading:'Team name', summaryHeading:'What you built' });
+</script>
+</body>
+</html>

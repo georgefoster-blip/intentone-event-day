@@ -1,0 +1,23 @@
+name: Best idea
+description: Capture an idea worth keeping from the IntentOne event day.
+title: "[Idea] "
+labels: ["best-idea"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Your name
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea in full
+      description: What it is, and what prompted it today.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: Optional. Who benefits and what it could change.
