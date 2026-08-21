@@ -128,6 +128,38 @@
   .agenda-note{font-size:var(--io-type-size-caption);color:var(--io-text-muted);margin-top:var(--io-spacing-8);}
 
   footer{margin-top:var(--io-spacing-64);padding-top:var(--io-spacing-16);border-top:1px solid var(--io-border-default);font-size:var(--io-type-size-caption);color:var(--io-text-muted);display:flex;justify-content:space-between;gap:var(--io-spacing-16);flex-wrap:wrap;}
+
+  /* ---------- event assistant chat ---------- */
+  .chat-fab{
+    position:fixed;right:20px;bottom:20px;z-index:60;cursor:pointer;
+    display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-weight:600;font-size:var(--io-type-size-small);
+    background:var(--io-action-primary);color:var(--io-action-primary-text);border:none;border-radius:999px;
+    padding:var(--io-spacing-12) var(--io-spacing-20);min-height:48px;box-shadow:0 4px 16px rgba(0,0,0,.18);
+  }
+  .chat-fab:hover{background:var(--io-action-primary-hover);}
+  .chat-panel{
+    position:fixed;right:20px;bottom:80px;z-index:60;width:min(380px,calc(100vw - 40px));height:min(520px,calc(100vh - 120px));
+    display:none;flex-direction:column;overflow:hidden;
+    background:var(--io-surface-primary);border:1px solid var(--io-border-strong);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);
+  }
+  .chat-panel.open{display:flex;}
+  .chat-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:var(--io-spacing-12) var(--io-spacing-16);background:var(--io-surface-layer-03);border-bottom:1px solid var(--io-border-default);}
+  .chat-head b{font-size:var(--io-type-size-small);color:var(--io-text-primary);}
+  .chat-head .sub{display:block;font-size:var(--io-type-size-caption);font-weight:400;color:var(--io-text-muted);}
+  .chat-close{background:none;border:none;cursor:pointer;font-family:inherit;font-size:var(--io-type-size-body);color:var(--io-text-secondary);min-height:44px;min-width:44px;border-radius:8px;}
+  .chat-close:hover{color:var(--io-text-primary);background:var(--io-surface-layer-02);}
+  .chat-log{flex:1;overflow-y:auto;padding:var(--io-spacing-16);display:flex;flex-direction:column;gap:var(--io-spacing-8);}
+  .msg{max-width:88%;padding:var(--io-spacing-8) var(--io-spacing-12);border-radius:12px;font-size:var(--io-type-size-small);line-height:1.45;white-space:pre-line;}
+  .msg.bot{background:var(--io-surface-layer-02);border:1px solid var(--io-border-default);color:var(--io-text-secondary);align-self:flex-start;border-bottom-left-radius:4px;}
+  .msg.me{background:var(--io-action-primary);color:var(--io-action-primary-text);align-self:flex-end;border-bottom-right-radius:4px;}
+  .msg.bot a{color:var(--io-text-link);}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;}
+  .chip{cursor:pointer;font-family:inherit;font-size:var(--io-type-size-caption);font-weight:500;color:var(--io-text-secondary);background:var(--io-surface-layer-00);border:1px solid var(--io-border-default);border-radius:999px;padding:6px 12px;min-height:32px;}
+  .chip:hover{border-color:var(--io-border-interactive);color:var(--io-text-primary);}
+  .chat-input{display:flex;gap:8px;padding:var(--io-spacing-12);border-top:1px solid var(--io-border-default);background:var(--io-surface-layer-01);}
+  .chat-input input{flex:1;font-family:inherit;font-size:var(--io-type-size-small);color:var(--io-text-primary);background:var(--io-surface-layer-00);border:1px solid var(--io-border-default);border-radius:8px;padding:var(--io-spacing-8) var(--io-spacing-12);min-height:44px;}
+  .chat-input button{font-family:inherit;font-weight:600;font-size:var(--io-type-size-small);cursor:pointer;background:var(--io-action-primary);color:var(--io-action-primary-text);border:none;border-radius:8px;padding:0 var(--io-spacing-16);min-height:44px;}
+  .chat-input button:hover{background:var(--io-action-primary-hover);}
 </style>
 </head>
 <body>
@@ -533,6 +565,19 @@
     </div>
   </section>
 
+  <button class="chat-fab" id="chat-fab" aria-expanded="false" aria-controls="chat-panel">Ask about the day</button>
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Event assistant">
+    <div class="chat-head">
+      <div><b>Event assistant</b><span class="sub">Answers from the event guide — timings, sessions, submissions</span></div>
+      <button class="chat-close" id="chat-close" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-log" id="chat-log" aria-live="polite"></div>
+    <form class="chat-input" id="chat-form">
+      <input id="chat-text" autocomplete="off" placeholder="e.g. when is lunch in Barcelona?" aria-label="Your question">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
   <footer>
     <span>Intent · IntentOne event day</span>
     <span>Submissions are GitHub issues in this site's repository. Design tokens: @intenthq/design-system 3.17.3.</span>
@@ -661,6 +706,164 @@ loadList(CFG.labels.idea, document.getElementById('idea-list'), document.getElem
   { noun:'idea', empty:'Start by submitting an idea above to see it listed here.', whoHeading:'Your name', summaryHeading:'The idea in full' });
 loadList(CFG.labels.shortlisted, document.getElementById('short-list'), document.getElementById('short-note'),
   { noun:'shortlisted entry', empty:'Start by submitting hackathon entries to give the judging pass something to read; the shortlist appears here once it has run.', whoHeading:'Team name', summaryHeading:'What you built' });
+
+// ---------- event assistant (runs entirely in the page) ----------
+(function(){
+  const CITIES = {
+    london:{label:'London', aliases:['london','uk','england']},
+    barcelona:{label:'Barcelona', aliases:['barcelona','spain','bcn']},
+    telaviv:{label:'Tel Aviv', aliases:['tel aviv','telaviv','israel','tlv']},
+    newyork:{label:'New York', aliases:['new york','newyork','ny','nyc','usa','america']},
+    remote:{label:'Remote', aliases:['remote','home','lisbon','portugal','south africa','dubai','uae','brazil','brasil']}
+  };
+  // times per city; remote gets UTC where the session is shared, else null
+  const SCHEDULE = [
+    {name:'Welcome and vision', aliases:['welcome','vision','start','kick off','kickoff','begin'], t:{london:'09:00',barcelona:'10:00',telaviv:'11:00',newyork:'07:30',remote:null}},
+    {name:'Fireside chat', aliases:['fireside','chat with slt','slt'], t:{london:'09:30',barcelona:'10:30',telaviv:'11:30',newyork:'10:45',remote:null}},
+    {name:'Persona walkthrough', aliases:['persona','walkthrough','case study','case studies'], t:{london:'10:15',barcelona:'11:15',telaviv:'12:15',newyork:'12:15',remote:null}},
+    {name:'Hackathon group work', aliases:['group work','build time','hack time','building'], t:{london:'11:30',barcelona:'12:30',telaviv:'13:30',newyork:'13:30',remote:null}},
+    {name:'Lunch', aliases:['lunch','food','eat','eating'], t:{london:'12:20',barcelona:'13:20',telaviv:'14:20',newyork:'11:30',remote:null}},
+    {name:'Sales Dragon’s Den', aliases:['dragon','den','pitch','pitches','sales pitch'], t:{london:'13:00',barcelona:'14:00',telaviv:'15:00',newyork:'08:00',remote:'12:00 UTC'}},
+    {name:'Break', aliases:['break','pause','coffee'], t:{london:'13:45',barcelona:'14:45',telaviv:'15:45',newyork:'08:45',remote:'12:45 UTC'}},
+    {name:'Best idea brainstorm and submit', aliases:['brainstorm','best idea','idea session','suggestion'], t:{london:'13:55',barcelona:'14:55',telaviv:'15:55',newyork:'08:55',remote:'12:55 UTC'}},
+    {name:'Company quiz', aliases:['quiz','trivia'], t:{london:'14:40',barcelona:'15:40',telaviv:'16:40',newyork:'09:40',remote:'13:40 UTC'}},
+    {name:'Hackathon presentations', aliases:['presentations','presenting','demos','present'], t:{london:'15:00',barcelona:'16:00',telaviv:'17:00',newyork:'10:00',remote:'14:00 UTC'}},
+    {name:'Awards, drinks and DJ', aliases:['awards','drinks','dj','party','celebration','music'], t:{london:'15:40',barcelona:'16:40',telaviv:'17:40',newyork:'14:30',remote:null}},
+    {name:'Close', aliases:['close','end','finish','over','home time'], t:{london:'17:00',barcelona:'18:00',telaviv:'19:00',newyork:'15:30',remote:null}}
+  ];
+  const FAQ = [
+    {k:['date','when is the event','what day','which day','october'],
+     a:'Tuesday 6 October 2026, all day, in every office at once — please keep client meetings off it.'},
+    {k:['hackathon','how does the hackathon work','teams','challenge'],
+     a:'Mixed teams across functions and offices take a challenge from the menu and build against it in the local morning, with 50 minutes of focused build time before the shared window. Presentations are live at 15:00 London time; New York enters a recorded pitch. AI shortlists, a human panel picks the winners, announced the following day. The brief and submission form are on the Hackathon tab.'},
+    {k:['submit','submission','enter','how do i enter','form'],
+     a:'Use the form on the Hackathon tab — it opens a pre-filled GitHub form, and you press its green button to confirm. Ideas go in through the Best ideas tab the same way. You need to be signed in to GitHub; no account, tell a facilitator.'},
+    {k:['idea','best idea','suggestion box','roadmap'],
+     a:'The suggestion box on the Best ideas tab is open all day, and the dedicated brainstorm-and-submit session runs at 13:55 London time. The winning idea takes a prize and a named route to the roadmap.'},
+    {k:['persona','walkthrough','case study','executive','campaign manager','salesperson'],
+     a:'You spend the morning block inside IntentOne in character — as an executive, a campaign manager or a salesperson — following a pre-prepared brief, and finish with something real: a report, an opportunity, a download. Your login is provisioned and tested before the day.'},
+    {k:['dragon','den','sales pitch','who pitches'],
+     a:'Around seven of the sales team pitch IntentOne individually, three to five minutes each, to a judging panel playing a CEO, a CTO and a CFO. Everyone watches live — the point is product understanding for the room, not a sales ranking. 13:00 London, 14:00 Barcelona, 15:00 Tel Aviv, 08:00 New York.'},
+    {k:['quiz','what is the quiz on'],
+     a:'The company quiz is live across every hub at 14:40 London time, drawn from the day’s sessions plus a little company history — including the difference between Edge, Lift and IntentOne, on purpose.'},
+    {k:['bring','laptop','what do i need','prepare','login','password','sign in'],
+     a:'Bring your laptop — every session needs it — your tested IntentOne login, and one idea for the suggestion box. Your login arrives before the day; sign in once when it does.'},
+    {k:['judge','judging','winner','who wins','shortlist','scoring','criteria'],
+     a:'Hackathon entries are shortlisted by AI against the challenge, then a human panel picks the winners. Entries are judged overnight and winners are announced the following day. The shortlist appears on the Shortlist tab with reasoning attached.'},
+    {k:['remote','home','lisbon','south africa','dubai','brazil','not in an office'],
+     a:'Remote colleagues are placed into hackathon teams rather than watching, and follow their team’s hub for the morning. The shared window runs 12:00 to 14:40 UTC for everyone — the Remote page under Day at a glance has the UTC times and conversions.'},
+    {k:['shared window','live block','together','all hubs','same time'],
+     a:'The shared window — Sales Dragon’s Den, break, best-idea brainstorm, company quiz and hackathon presentations — runs 12:00 to 14:40 UTC, the same moment in every hub. Everything else runs on each hub’s own clock.'},
+    {k:['why','point','purpose','matter'],
+     a:'IntentOne is the only product we sell, and the day is built around learning, then competition, then connection — everyone leaves having used, built with or explained the product. One welcome, one quiz, one set of winners in every hub.'},
+    {k:['help','stuck','question','who do i ask','slack','channel'],
+     a:'Questions, and everything as it lands, go in the event channel in Slack. Facilitators in each hub can also help on the day.'},
+    {k:['agenda','schedule','timetable','plan','full day','glance'],
+     a:'AGENDA'}
+  ];
+
+  const log = document.getElementById('chat-log');
+  const panel = document.getElementById('chat-panel');
+  const fab = document.getElementById('chat-fab');
+
+  function add(kind, text){
+    const d = document.createElement('div');
+    d.className = 'msg ' + kind;
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+  function addChips(){
+    const wrap = document.createElement('div');
+    wrap.className = 'chips';
+    ['When is lunch in Barcelona?','Full agenda','How do I submit?','What do I bring?','How does judging work?'].forEach(q => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.textContent = q;
+      b.addEventListener('click', () => { ask(q); });
+      wrap.appendChild(b);
+    });
+    log.appendChild(wrap);
+    log.scrollTop = log.scrollHeight;
+  }
+  function norm(s){ return s.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
+  function hasWord(q, a){ return new RegExp('\\b' + a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\b').test(q); }
+
+  function findCity(q){
+    for (const key in CITIES) if (CITIES[key].aliases.some(a => hasWord(q, a))) return key;
+    return null;
+  }
+  function findSession(q){
+    let best = null, bestLen = 0;
+    for (const s of SCHEDULE) for (const a of s.aliases.concat([norm(s.name)])) {
+      if (hasWord(q, a) && a.length > bestLen) { best = s; bestLen = a.length; }
+    }
+    return best;
+  }
+  function agendaFor(city){
+    const c = CITIES[city];
+    if (city === 'remote') {
+      return 'Remote colleagues follow their hackathon team’s hub for the morning. The shared window, live for everyone (UTC): Sales Dragon’s Den 12:00 · Break 12:45 · Best idea brainstorm 12:55 · Company quiz 13:40 · Hackathon presentations 14:00 · window closes 14:40. The Remote page under Day at a glance has conversions for Lisbon, South Africa, Dubai and Brazil.';
+    }
+    const rows = SCHEDULE.filter(s => s.t[city]).sort((a,b) => a.t[city].localeCompare(b.t[city]));
+    return c.label + ', in running order:\n' + rows.map(s => s.t[city] + '  ' + s.name).join('\n');
+  }
+  function answer(raw){
+    const q = norm(raw);
+    if (!q) return 'Ask about a session, a time, or how the day works.';
+    const city = findCity(q);
+    const session = findSession(q);
+    const wantsTime = /\b(when|what time|time|start|timing|timings)\b/.test(q) || !!city;
+
+    if (session && (wantsTime || q.length < 30)) {
+      if (city) {
+        const t = session.t[city];
+        if (t) return session.name + ' in ' + CITIES[city].label + ' is at ' + t + (city === 'remote' ? '' : ' local time') + '.';
+        if (city === 'remote') return session.name + ' runs on each hub’s own clock — remote colleagues follow their hackathon team’s hub. The shared window is 12:00 to 14:40 UTC.';
+      }
+      const t = session.t;
+      return session.name + ' — London ' + t.london + ' · Barcelona ' + t.barcelona + ' · Tel Aviv ' + t.telaviv + ' · New York ' + t.newyork + ' (local times).';
+    }
+    if (city && (wantsTime || /agenda|schedule|day|plan/.test(q))) return agendaFor(city);
+
+    let best = null, bestScore = 0;
+    for (const f of FAQ) {
+      let score = 0;
+      for (const k of f.k) if (hasWord(q, k)) score += k.length;
+      if (score > bestScore) { best = f; bestScore = score; }
+    }
+    if (best) {
+      if (best.a === 'AGENDA') return agendaFor(city || 'london') + (city ? '' : '\n\nSay a city for its own list — or open Day at a glance in the nav for every hub side by side.');
+      return best.a;
+    }
+    return 'That one is not in the event guide. Try a session name, a city, or a question like “when is the quiz in Tel Aviv” — and for anything else, the event channel in Slack is the place.';
+  }
+  function ask(text){
+    add('me', text);
+    add('bot', answer(text));
+  }
+
+  fab.addEventListener('click', () => {
+    const open = panel.classList.toggle('open');
+    fab.setAttribute('aria-expanded', String(open));
+    if (open && !log.childElementCount) {
+      add('bot', 'Morning, afternoon or evening — wherever you are. Ask me anything about the event day: timings for your hub, what a session is, or how to submit.');
+      addChips();
+      document.getElementById('chat-text').focus();
+    }
+  });
+  document.getElementById('chat-close').addEventListener('click', () => {
+    panel.classList.remove('open');
+    fab.setAttribute('aria-expanded','false');
+  });
+  document.getElementById('chat-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const input = document.getElementById('chat-text');
+    const v = input.value.trim();
+    if (!v) return;
+    input.value = '';
+    ask(v);
+  });
+})();
 </script>
 </body>
 </html>
