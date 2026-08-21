@@ -1,0 +1,33 @@
+name: Opportunity challenge submission
+description: Submit your team's working opportunity from IntentOne
+title: "[Opportunity] "
+labels: ["opportunity-submission"]
+body:
+  - type: input
+    id: team
+    attributes:
+      label: Team name
+    validations:
+      required: true
+  - type: input
+    id: persona
+    attributes:
+      label: Persona used
+      description: Which persona surfaced it — executive, campaign manager or salesperson.
+  - type: textarea
+    id: opportunity
+    attributes:
+      label: The opportunity
+      description: What IntentOne surfaced and what you did with it.
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Why it matters
+      description: The value to the business if this opportunity were acted on.
+  - type: input
+    id: evidence
+    attributes:
+      label: Evidence link
+      description: A link to the report, download or screenshot that shows the working opportunity.

@@ -178,6 +178,7 @@
     <button class="tab" data-view="home">Home</button>
     <button class="tab" data-view="agenda">Day at a glance</button>
     <button class="tab" data-view="hackathon">Hackathon</button>
+    <button class="tab" data-view="opportunities">Opportunity drop</button>
     <button class="tab" data-view="ideas">Best ideas</button>
     <button class="tab" data-view="shortlist">Shortlist</button>
     <button class="tab" data-view="packs">Info packs</button>
@@ -192,20 +193,26 @@
         <p>The challenge brief, how the day runs, and the submission form. One entry per team before the deadline.</p>
         <span class="go">Enter the hackathon →</span>
       </button>
+      <button class="card" data-view="opportunities">
+        <span class="kicker">02 · Prove</span>
+        <h3>Opportunity drop</h3>
+        <p>Found a working opportunity in IntentOne during the persona block? Drop it here — one queue, scored like the rest.</p>
+        <span class="go">Submit an opportunity →</span>
+      </button>
       <button class="card" data-view="ideas">
-        <span class="kicker">02 · Capture</span>
+        <span class="kicker">03 · Capture</span>
         <h3>Best ideas</h3>
         <p>Not everything good today is a build. Drop any idea worth keeping in here as it happens, in under a minute.</p>
         <span class="go">Submit an idea →</span>
       </button>
       <button class="card" data-view="shortlist">
-        <span class="kicker">03 · Judge</span>
+        <span class="kicker">04 · Judge</span>
         <h3>Shortlist</h3>
         <p>The judged shortlist of hackathon submissions appears here once the judging pass has run.</p>
         <span class="go">See the shortlist →</span>
       </button>
       <button class="card" data-view="packs">
-        <span class="kicker">04 · Learn</span>
+        <span class="kicker">05 · Learn</span>
         <h3>Info packs</h3>
         <p>The reference material for the day: activities, the persona walkthroughs, timings and logistics.</p>
         <span class="go">Open the packs →</span>
@@ -475,6 +482,49 @@
     <p class="listnote" id="hack-note"></p>
   </section>
 
+  <!-- ============ OPPORTUNITY DROP ============ -->
+  <section class="view" id="view-opportunities" aria-label="Opportunity drop">
+    <h2>Opportunity drop</h2>
+    <p>The persona block ends with something real — a report, an opportunity, a download. When your team lands a working opportunity in IntentOne, drop it here. Every entry goes into one queue and is scored the same way, whichever hub or persona it came from.</p>
+
+    <form class="submit" id="opp-form">
+      <div class="field">
+        <label for="of-team">Team name</label>
+        <input id="of-team" name="team" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="of-title">Opportunity, in one line</label>
+        <input id="of-title" name="title" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="of-persona">Persona used <span class="hint">Executive, campaign manager or salesperson.</span></label>
+        <select id="of-persona" name="persona">
+          <option>Executive</option>
+          <option>Campaign manager</option>
+          <option>Salesperson</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="of-opportunity">The opportunity <span class="hint">What IntentOne surfaced and what you did with it.</span></label>
+        <textarea id="of-opportunity" name="opportunity" required></textarea>
+      </div>
+      <div class="field">
+        <label for="of-value">Why it matters <span class="hint">Optional. The value to the business if this were acted on.</span></label>
+        <textarea id="of-value" name="value"></textarea>
+      </div>
+      <div class="field">
+        <label for="of-evidence">Evidence link <span class="hint">The report, download or screenshot that shows it working.</span></label>
+        <input id="of-evidence" name="evidence" type="url" placeholder="https://">
+      </div>
+      <button class="btn" type="submit">Review and submit on GitHub</button>
+      <p class="formnote">Submitting opens a pre-filled GitHub form; press its green button to confirm. You need to be signed in to GitHub. No account? Give your entry to a facilitator and they will file it for you.</p>
+    </form>
+
+    <h3>The queue</h3>
+    <div class="list" id="opp-list" aria-live="polite"></div>
+    <p class="listnote" id="opp-note"></p>
+  </section>
+
   <!-- ============ BEST IDEAS ============ -->
   <section class="view" id="view-ideas" aria-label="Best ideas">
     <h2>Best ideas</h2>
@@ -589,7 +639,7 @@
 const CFG = {
   owner: 'georgefoster-blip',
   repo: 'intentone-event-day',
-  labels: { hackathon: 'hackathon-submission', idea: 'best-idea', shortlisted: 'shortlisted' }
+  labels: { hackathon: 'hackathon-submission', opportunity: 'opportunity-submission', idea: 'best-idea', shortlisted: 'shortlisted' }
 };
 const GH = 'https://github.com/' + CFG.owner + '/' + CFG.repo;
 const API = 'https://api.github.com/repos/' + CFG.owner + '/' + CFG.repo;
@@ -612,7 +662,7 @@ const API = 'https://api.github.com/repos/' + CFG.owner + '/' + CFG.repo;
 })();
 
 // ---------- routing ----------
-const VIEWS = ['home','agenda','agenda-london','agenda-barcelona','agenda-telaviv','agenda-newyork','agenda-remote','hackathon','ideas','shortlist','packs'];
+const VIEWS = ['home','agenda','agenda-london','agenda-barcelona','agenda-telaviv','agenda-newyork','agenda-remote','hackathon','opportunities','ideas','shortlist','packs'];
 function show(v){
   if (!VIEWS.includes(v)) v = 'home';
   VIEWS.forEach(k => document.getElementById('view-' + k).classList.toggle('on', k === v));
@@ -639,6 +689,21 @@ document.getElementById('hack-form').addEventListener('submit', function(e){
     summary: f.get('summary'),
     demo: f.get('demo') || '',
     repo: f.get('repo') || ''
+  });
+  window.open(GH + '/issues/new?' + params.toString(), '_blank', 'noopener');
+});
+
+document.getElementById('opp-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const f = new FormData(this);
+  const params = new URLSearchParams({
+    template: 'opportunity-submission.yml',
+    title: '[Opportunity] ' + f.get('title'),
+    team: f.get('team'),
+    persona: f.get('persona'),
+    opportunity: f.get('opportunity'),
+    value: f.get('value') || '',
+    evidence: f.get('evidence') || ''
   });
   window.open(GH + '/issues/new?' + params.toString(), '_blank', 'noopener');
 });
@@ -677,7 +742,7 @@ function renderIssues(issues, listEl, opts){
     const when = new Date(is.created_at).toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
     const short = (is.labels || []).some(l => l.name === CFG.labels.shortlisted);
     return '<div class="entry">'
-      + '<div class="top"><a class="title" href="' + is.html_url + '" target="_blank" rel="noopener">' + esc(is.title.replace(/^\[(Hackathon|Idea)\]\s*/,'')) + '</a>'
+      + '<div class="top"><a class="title" href="' + is.html_url + '" target="_blank" rel="noopener">' + esc(is.title.replace(/^\[(Hackathon|Idea|Opportunity)\]\s*/,'')) + '</a>'
       + '<span class="meta">' + esc(who) + ' · ' + when
       + (short ? ' · <span class="badge"><span class="dot dot-shortlisted"></span>Shortlisted</span>' : '')
       + '</span></div>'
@@ -693,7 +758,7 @@ async function loadList(label, listEl, noteEl, opts){
     if (!r.ok) throw new Error(r.status);
     const issues = await r.json();
     renderIssues(issues, listEl, opts);
-    noteEl.textContent = issues.length + ' ' + opts.noun + (issues.length === 1 ? '' : 's') + ' so far. The list refreshes when you reload the page.';
+    noteEl.textContent = issues.length + ' ' + (issues.length === 1 ? opts.noun : (opts.plural || opts.noun + 's')) + ' so far. The list refreshes when you reload the page.';
   } catch (err) {
     listEl.innerHTML = '<div class="entry"><span class="body">The ' + esc(opts.noun) + ' list could not load (' + esc(String(err.message || err)) + '). Reload to try again, or open the list directly on GitHub.</span></div>';
     noteEl.innerHTML = '<a href="' + GH + '/issues?q=is%3Aissue+label%3A' + label + '" target="_blank" rel="noopener">Open the list on GitHub ↗</a>';
@@ -702,6 +767,8 @@ async function loadList(label, listEl, noteEl, opts){
 
 loadList(CFG.labels.hackathon, document.getElementById('hack-list'), document.getElementById('hack-note'),
   { noun:'submission', empty:'Start by submitting your entry above to see it listed here.', whoHeading:'Team name', summaryHeading:'What you built' });
+loadList(CFG.labels.opportunity, document.getElementById('opp-list'), document.getElementById('opp-note'),
+  { noun:'opportunity', plural:'opportunities', empty:'Start by dropping your team’s working opportunity above to see it queued here.', whoHeading:'Team name', summaryHeading:'The opportunity' });
 loadList(CFG.labels.idea, document.getElementById('idea-list'), document.getElementById('idea-note'),
   { noun:'idea', empty:'Start by submitting an idea above to see it listed here.', whoHeading:'Your name', summaryHeading:'The idea in full' });
 loadList(CFG.labels.shortlisted, document.getElementById('short-list'), document.getElementById('short-note'),
@@ -738,6 +805,8 @@ loadList(CFG.labels.shortlisted, document.getElementById('short-list'), document
      a:'Mixed teams across functions and offices take a challenge from the menu and build against it in the local morning, with 50 minutes of focused build time before the shared window. Presentations are live at 15:00 London time; New York enters a recorded pitch. AI shortlists, a human panel picks the winners, announced the following day. The brief and submission form are on the Hackathon tab.'},
     {k:['submit','submission','enter','how do i enter','form'],
      a:'Use the form on the Hackathon tab — it opens a pre-filled GitHub form, and you press its green button to confirm. Ideas go in through the Best ideas tab the same way. You need to be signed in to GitHub; no account, tell a facilitator.'},
+    {k:['opportunity','opportunities','opportunity drop','working opportunity','opportunity challenge'],
+     a:'When your team lands a working opportunity in IntentOne during the persona block, submit it on the Opportunity drop tab — team name, the persona used, what IntentOne surfaced, and an evidence link. Every entry goes into one queue and is scored the same way, whichever hub it came from.'},
     {k:['idea','best idea','suggestion box','roadmap'],
      a:'The suggestion box on the Best ideas tab is open all day, and the dedicated brainstorm-and-submit session runs at 13:55 London time. The winning idea takes a prize and a named route to the roadmap.'},
     {k:['persona','walkthrough','case study','executive','campaign manager','salesperson'],
