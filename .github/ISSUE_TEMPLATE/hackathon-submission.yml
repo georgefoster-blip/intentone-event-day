@@ -1,6 +1,6 @@
-name: Hackathon submission
+name: Opportunity Challenge submission
 description: Submit your team's hackathon entry for the IntentOne event day.
-title: "[Hackathon] "
+title: "[Challenge] "
 labels: ["hackathon-submission"]
 body:
   - type: input
